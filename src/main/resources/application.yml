@@ -29,6 +29,7 @@ spring:
 
 mybatis:
   configuration:
+    # 开启支持驼峰命名
     map-underscore-to-camel-case: true
 
 
