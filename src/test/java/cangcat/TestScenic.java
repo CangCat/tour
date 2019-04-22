@@ -1,3 +1,5 @@
+package cangcat;
+
 import cn.team.MainApplication;
 import cn.team.entity.Scenic;
 import cn.team.service.ScenicService;

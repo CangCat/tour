@@ -19,8 +19,6 @@ mybatis:
 
 
 
-
-
     #Redis 配置
   redis:
     host: 139.196.96.35
