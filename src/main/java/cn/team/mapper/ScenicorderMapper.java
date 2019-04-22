@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface ScenicorderMapper {
@@ -60,4 +62,17 @@ public interface ScenicorderMapper {
             "where order_id = #{orderId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Scenicorder record);
+
+
+    /**
+     * 查询订单表所有内容
+     *
+     * @return
+     */
+    @Select(value = "select " +
+            "order_id, user_id, scenic_id, account, create_time, status, play_time " +
+            "from scenicorder ")
+    List<Scenicorder> selectAll();
+
+
 }

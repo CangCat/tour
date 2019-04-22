@@ -25,6 +25,8 @@ spring:
         max-wait: 60000ms
         min-idle: 1
 
+
+
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
