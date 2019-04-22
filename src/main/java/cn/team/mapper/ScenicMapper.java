@@ -1,16 +1,14 @@
 package cn.team.mapper;
 
 import cn.team.entity.Scenic;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Mapper
+@Repository
 public interface ScenicMapper {
     @Delete({
             "delete from scenic",
@@ -115,4 +113,16 @@ public interface ScenicMapper {
             "where scenic_id = #{scenicId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Scenic record);
+
+
+    /**
+     * 查询景区表所有内容
+     *
+     * @return
+     */
+    @Select(value = "select scenic_id, scenic_name, scenic_address, scenic_link, scenic_tel, scenic_ticket, " +
+            "scenic_charge, scenic_pic, open_time, end_time, check_type, scenic_status, create_time, " +
+            "update_time, type_one, type_two, scenic_intro " +
+            "from scenic")
+    List<Scenic> selectAll();
 }

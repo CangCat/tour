@@ -3,18 +3,26 @@ package cn.team.entity;
 import java.util.Date;
 
 public class Scenicorder {
+
+    //订单id
     private Integer orderId;
 
+    //用户id
     private Integer userId;
 
+    //风景id
     private Integer scenicId;
 
+    //购买数量
     private Integer account;
 
+    //订单创建时间
     private Date createTime;
 
+    //订单状态  0-下单成功  1-订单过时  2-订单删除
     private String status;
 
+    //游玩时间
     private Date playTime;
 
     public Integer getOrderId() {
@@ -71,5 +79,18 @@ public class Scenicorder {
 
     public void setPlayTime(Date playTime) {
         this.playTime = playTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Scenicorder{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", scenicId=" + scenicId +
+                ", account=" + account +
+                ", createTime=" + createTime +
+                ", status='" + status + '\'' +
+                ", playTime=" + playTime +
+                '}';
     }
 }

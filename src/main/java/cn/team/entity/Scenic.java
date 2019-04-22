@@ -3,39 +3,58 @@ package cn.team.entity;
 import java.util.Date;
 
 public class Scenic {
+
+    //景点ID
     private Integer scenicId;
 
+    //景点名称
     private String scenicName;
 
+    //景点详细地址
     private String scenicAddress;
 
+    //联系人
     private String scenicLink;
 
+    //联系电话
     private String scenicTel;
 
+    //购票类型：0-1人票  6-团票
     private String scenicTicket;
 
+    //收费金额
     private Double scenicCharge;
 
+    //景点图片
     private String scenicPic;
 
+    //开放时间
     private String openTime;
 
+    //结束时间
     private String endTime;
 
+    //审核状态：0-审核 1-未审核
     private String checkType;
 
+    //状态 0-开放  1-删除
     private String scenicStatus;
 
+    //创建时间
     private Date createTime;
 
+    //修改时间
     private Date updateTime;
 
+    //类型1    1-省内游  2-国内游  3-港澳台游  4-国外游
     private String typeOne;
 
+    //类型2    1-热门主题  2-热门目的地  3-自由行  4-跟团  5-邮轮游
     private String typeTwo;
 
+    //景点简介
     private String scenicIntro;
+
 
     public Integer getScenicId() {
         return scenicId;
@@ -171,5 +190,28 @@ public class Scenic {
 
     public void setScenicIntro(String scenicIntro) {
         this.scenicIntro = scenicIntro == null ? null : scenicIntro.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Scenic{" +
+                "scenicId=" + scenicId +
+                ", scenicName='" + scenicName + '\'' +
+                ", scenicAddress='" + scenicAddress + '\'' +
+                ", scenicLink='" + scenicLink + '\'' +
+                ", scenicTel='" + scenicTel + '\'' +
+                ", scenicTicket='" + scenicTicket + '\'' +
+                ", scenicCharge=" + scenicCharge +
+                ", scenicPic='" + scenicPic + '\'' +
+                ", openTime='" + openTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", checkType='" + checkType + '\'' +
+                ", scenicStatus='" + scenicStatus + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", typeOne='" + typeOne + '\'' +
+                ", typeTwo='" + typeTwo + '\'' +
+                ", scenicIntro='" + scenicIntro + '\'' +
+                '}';
     }
 }
