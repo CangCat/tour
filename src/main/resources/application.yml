@@ -12,14 +12,6 @@ spring:
     password: snake949
     type: com.alibaba.druid.pool.DruidDataSource
 
-
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-
-
-
-    #Redis 配置
   redis:
     host: 139.196.96.35
     port: 6379
@@ -32,4 +24,17 @@ mybatis:
         max-idle: 8
         max-wait: 60000ms
         min-idle: 1
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
+
+
+
+
+
+
 
