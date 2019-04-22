@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /tour
+
+spring:
+  datasource:
+    #四要素
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tour?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: snake949
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+    #Redis 配置
+  redis:
+    host: 139.196.96.35
+    port: 6379
+    password: cangcat
+    database: 0
+
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: 60000ms
+        min-idle: 1
+
