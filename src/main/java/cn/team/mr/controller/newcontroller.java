@@ -8,7 +8,7 @@ public class newcontroller {
 	
 	@RequestMapping("hi")
 	public String hal(){
-		return "halou";
+		return "halou 11";
 	}
 	
 }
