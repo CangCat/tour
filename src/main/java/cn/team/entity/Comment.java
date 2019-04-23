@@ -92,4 +92,11 @@ public class Comment {
     public void setCommIntro(String commIntro) {
         this.commIntro = commIntro == null ? null : commIntro.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Comment [commId=" + commId + ", userId=" + userId + ", projectId=" + projectId + ", commTime="
+				+ commTime + ", perfection=" + perfection + ", status=" + status + ", lookNum=" + lookNum
+				+ ", projectType=" + projectType + ", commIntro=" + commIntro + "]";
+	}
 }
