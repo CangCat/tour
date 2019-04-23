@@ -21,12 +21,16 @@
 					<form class="layui-form" action="">
 						<div class="layui-form-item">
 							<div class="layui-inline tool-btn">
-								<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="scenic-add.html"><i class="layui-icon">&#xe654;</i></button>
+								<button class="layui-btn layui-btn-small layui-btn-normal addBtn"
+										data-url="${path}/scenic/toScenicAdd"><i class="layui-icon">&#xe654;</i>
+								</button>
 								<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="scenic-add.html"><i class="layui-icon">&#xe640;</i></button>
 								<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="scenic-add.html"><i class="iconfont">&#xe656;</i></button>
 							</div>
 							<div class="layui-inline">
-								<input type="text" name="title" required lay-verify="required" placeholder="请输入景点" autocomplete="off" class="layui-input">
+								<!--required lay-verify="required"-->
+								<input type="text" name="title" placeholder="请输入景点" autocomplete="off"
+									   class="layui-input">
 							</div>
 							<div class="layui-inline">
 								<select name="states" lay-filter="status">
@@ -136,11 +140,12 @@
                                     <td>
                                         <div class="layui-inline">
                                             <button class="layui-btn layui-btn-small layui-btn-normal go-btn"
-                                                    data-id="1" data-url="scenic-detail.html"
-                                                    onclick="toAdd(${scenic.scenicId})"><i
+													data-id="${scenic.scenicId}"
+													data-url="${path}/scenic/toScenicDetail/${scenic.scenicId}"><i
                                                     class="layui-icon">&#xe642;</i></button>
                                             <button class="layui-btn layui-btn-small layui-btn-danger del-btn"
-                                                    data-id="1" data-url="scenic-detail.html" id="${scenic.scenicId}"><i
+													data-id="${scenic.scenicId}"
+													data-url="${path}/scenic/deleteByPrimaryKey"><i
                                                     class="layui-icon">&#xe640;</i></button>
                                         </div>
                                     </td>
@@ -168,10 +173,6 @@
 	</body>
 
     <script type="text/javascript">
-
-        function toAdd(id) {
-            location.href = "${path}/scenic/toScenicAdd/" + id;
-        }
 
     </script>
 </html>

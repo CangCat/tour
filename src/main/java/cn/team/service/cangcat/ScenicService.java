@@ -33,4 +33,21 @@ public interface ScenicService {
      */
     Scenic selectByPrimaryKey(Integer id);
 
+
+    /**
+     * 根据 ID 删除
+     *
+     * @param id
+     * @return
+     */
+    int deleteByPrimaryKey(Integer id);
+
+    /**
+     * 根据主键字符串进行删除，类中只有存在一个带有@Id注解的字段
+     *
+     * @param ids 如 "1,2,3,4"
+     * @return
+     */
+    int deleteByIds(String ids);
+
 }

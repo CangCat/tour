@@ -86,6 +86,9 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
 			message:'您确定要进行删除吗？',
 			success:function(){
 				layer.msg('确定了')
+				console.log(url);
+				console.log(id);
+				location.href = url + "/" + id;
 			},
 			cancel:function(){
 				layer.msg('取消了')

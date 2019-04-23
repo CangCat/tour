@@ -40,5 +40,14 @@ public class ScenicServiceImpl implements ScenicService {
         return scenicMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return scenicMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteByIds(String ids) {
+        return scenicMapper.deleteByIds(ids);
+    }
 
 }
