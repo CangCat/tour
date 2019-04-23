@@ -4,7 +4,6 @@ import cn.team.service.cangcat.ScenicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author CangCat
@@ -19,7 +18,7 @@ public class ScenicController {
 
     @RequestMapping("toScenicList")
     public String toScenicList() {
-        return "/WEB-INF/admin/index/scenic-list.jsp";
+        return "admin/index/scenic-list";
     }
 
 

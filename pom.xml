@@ -76,6 +76,19 @@
             <version>1.2</version>
         </dependency>
 
+        <!--    springboot使用jsp页面必须加上 tomcat配置  因为springboot内嵌的tomcat是9，所以导致的问题-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <!--            <version>3.0.1</version>-->
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
