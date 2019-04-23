@@ -1,7 +1,6 @@
 package cn.team.service.cangcat.impl;
 
 import cn.team.entity.Scenicorder;
-import cn.team.mapper.ScenicorderMapper;
 import cn.team.service.cangcat.ScenicorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

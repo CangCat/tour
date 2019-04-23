@@ -1,7 +1,6 @@
 package cn.team.service.cangcat.impl;
 
 import cn.team.entity.Scenic;
-import cn.team.mapper.ScenicMapper;
 import cn.team.service.cangcat.ScenicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

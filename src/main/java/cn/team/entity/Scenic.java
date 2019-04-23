@@ -1,9 +1,16 @@
 package cn.team.entity;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Table(name = "scenic")
 public class Scenic {
 
+    @Id
+    @KeySql(useGeneratedKeys = true)
     //景点ID
     private Integer scenicId;
 
