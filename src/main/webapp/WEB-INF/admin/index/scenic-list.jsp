@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE>
 <html class="iframe-h">
 
@@ -10,8 +11,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>旅游景点</title>
-		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
+		<link rel="stylesheet" type="text/css" href="${path}/static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="${path}/static/admin/css/admin.css"/>
 	</head>
 
 	<body>
@@ -125,8 +126,8 @@
 					</div>
 				</div>
 		</div>
-		<script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${path}/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${path}/static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>
