@@ -10,5 +10,4 @@ import java.util.List;
  */
 public interface ScenicService {
 
-    List<Scenic> selectAll();
 }

@@ -16,11 +16,4 @@ import java.util.List;
 @Transactional
 public class ScenicorderServiceImpl implements ScenicorderService {
 
-    @Autowired
-    ScenicorderMapper scenicorderMapper;
-
-    @Override
-    public List<Scenicorder> selectAll() {
-        return scenicorderMapper.selectAll();
-    }
 }

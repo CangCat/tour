@@ -16,17 +16,5 @@ import java.util.List;
 @Transactional
 public class ScenicServiceImpl implements ScenicService {
 
-    @Autowired
-    ScenicMapper scenicMapper;
-
-    /**
-     * 查询景区表所有内容
-     *
-     * @return
-     */
-    @Override
-    public List<Scenic> selectAll() {
-        return scenicMapper.selectAll();
-    }
 
 }
