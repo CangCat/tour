@@ -1,9 +1,11 @@
 package cn.team.mapper;
 
-import cn.team.entity.Travels;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -11,6 +13,9 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
+import cn.team.entity.Travels;
+
+@Mapper
 public interface TravelsMapper {
     @Delete({
             "delete from travels",
@@ -87,4 +92,8 @@ public interface TravelsMapper {
             "where travel_id = #{travelId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Travels record);
+    
+    
+    @Select("select travel_id, user_id, scenic_id, create_time, prefaction, look_num, picture, status, scenic_id, create_time,prefaction, look_num,picture, status, like_num,intro from travels")
+    List<Travels> findAllTravels();
 }
