@@ -1,5 +1,6 @@
 package cn.team.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
@@ -10,7 +11,7 @@ import java.util.Date;
 public class Scenic {
 
     @Id
-    @KeySql(useGeneratedKeys = true)
+    @KeySql(useGeneratedKeys = true)  //主键策略  true代表主键递增
     //景点ID
     private Integer scenicId;
 
@@ -48,9 +49,11 @@ public class Scenic {
     private String scenicStatus;
 
     //创建时间
+    @DateTimeFormat(pattern = "yy-MM-dd")
     private Date createTime;
 
     //修改时间
+    @DateTimeFormat(pattern = "yy-MM-dd")
     private Date updateTime;
 
     //类型1    1-省内游  2-国内游  3-港澳台游  4-国外游

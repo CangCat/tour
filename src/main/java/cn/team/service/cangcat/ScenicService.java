@@ -10,4 +10,27 @@ import java.util.List;
  */
 public interface ScenicService {
 
+    /**
+     * 查询所有
+     *
+     * @return
+     */
+    List<Scenic> selectAll();
+
+    /**
+     * 动态查询
+     *
+     * @param scenic
+     * @return
+     */
+    Scenic selectOne(Scenic scenic);
+
+    /**
+     * 根据 id 查询
+     *
+     * @param id
+     * @return
+     */
+    Scenic selectByPrimaryKey(Integer id);
+
 }

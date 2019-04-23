@@ -1,9 +1,16 @@
 package cn.team.entity;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Table
 public class Scenicorder {
 
+    @Id
+    @KeySql(useGeneratedKeys = true)  //主键策略  true代表主键递增
     //订单id
     private Integer orderId;
 
