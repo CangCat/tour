@@ -1,4 +1,4 @@
-package cn.team.service;
+package cn.team.service.cangcat;
 
 import cn.team.entity.Scenic;
 
