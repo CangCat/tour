@@ -2,7 +2,16 @@ package cn.team.entity;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import tk.mybatis.mapper.annotation.KeySql;
+
+@Table
 public class Restaurant {
+	
+	@Id
+	@KeySql(useGeneratedKeys=true)
     private Integer restId;
 
     private Integer scenicId;
@@ -18,8 +27,35 @@ public class Restaurant {
     private Date createTime;
 
     private String restIntro;
+    
+    private String restAddress;
+    
+    private Scenic scenic;
+    
+    public Scenic getScenic() {
+		return scenic;
+	}
 
-    public Integer getRestId() {
+	public void setScenic(Scenic scenic) {
+		this.scenic = scenic;
+	}
+
+	@Override
+	public String toString() {
+		return "Restaurant [restId=" + restId + ", scenicId=" + scenicId + ", restName=" + restName + ", restTel="
+				+ restTel + ", restPic=" + restPic + ", status=" + status + ", createTime=" + createTime
+				+ ", restIntro=" + restIntro + ", restAddress=" + restAddress + "]";
+	}
+
+	public String getRestAddress() {
+		return restAddress;
+	}
+
+	public void setRestAddress(String restAddress) {
+		this.restAddress = restAddress;
+	}
+
+	public Integer getRestId() {
         return restId;
     }
 
