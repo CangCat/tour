@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE>
 <html>
 	<head>
@@ -7,8 +10,8 @@
   		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
-		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+        <link rel="stylesheet" type="text/css" href="${path}/static/admin/layui/css/layui.css"/>
+        <link rel="stylesheet" type="text/css" href="${path}/static/admin/css/admin.css"/>
 	</head>
 	<body>
 	<form class="layui-form column-content-detail">
@@ -19,17 +22,20 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">景点名称：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入文章名称" autocomplete="off" class="layui-input">
+										<input type="text" name="scenicName" required lay-verify="required"
+											   placeholder="请输入文章名称" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">景区分类：</label>
 									<div class="layui-input-block">
-										<select name="category" lay-verify="required">
+										<select name="typeOne" lay-verify="required">
 											<option value="">请选择分类</option>
-											<optgroup label="国内游">
-												<option value="1" selected="">国内游</option>
+											<optgroup <%--label="国内游"--%>>
+												<option value="1" selected="">省内游</option>
 												<option value="2">国外游</option>
+												<option value="3">港澳台游</option>
+												<option value="4">国外游</option>
 											</optgroup>
 										</select>
 									</div>
@@ -37,7 +43,7 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">图像上传：</label>
 									<div class="layui-input-block">
-										<input type="file" name="file（可随便定义）" class="layui-upload-file">
+										<input type="file" name="file" class="layui-upload-file">
 									</div>
 								</div>
 								<div class="layui-form-item">
@@ -127,8 +133,10 @@
 						</div>
 					</div>
 				</form>
-	<script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${path}/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${path}/static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+
+
 	<script>
 		layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function() {
 				var form = layui.form(),
