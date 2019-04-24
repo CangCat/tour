@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,9 +8,9 @@
 		<meta name="renderer" content="webkit">
   		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>评论管理</title>
-		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
-		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+		<title>è¯è®ºç®¡ç</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/admin/css/admin.css"/>
 	</head>
 	<body>
 	<form class="layui-form column-content-detail">
@@ -16,54 +19,54 @@
 							<div class="layui-tab-item"></div>
 							<div class="layui-tab-item layui-show">
 								<div class="layui-form-item">
-									<label class="layui-form-label">菜品名称：</label>
+									<label class="layui-form-label">èååç§°ï¼</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入菜品名称" autocomplete="off" class="layui-input">
+										<input type="text" name="name" required lay-verify="required" placeholder="è¯·è¾å¥èååç§°" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
-									<label class="layui-form-label">餐厅分类：</label>
+									<label class="layui-form-label">é¤ååç±»ï¼</label>
 									<div class="layui-input-block">
 										<select name="category" lay-verify="required">
-											<option value="">请选择所属餐厅</option>
-											<optgroup label="国内游">
-												<option value="1" selected="">成都一品香</option>
-												<option value="2">京城第一厨</option>
+											<option value="">è¯·éæ©æå±é¤å</option>
+											<optgroup label="å½åæ¸¸">
+												<option value="1" selected="">æé½ä¸åé¦</option>
+												<option value="2">äº¬åç¬¬ä¸å¨</option>
 											</optgroup>
 										</select>
 									</div>
 								</div>
 								<div class="layui-form-item">
-									<label class="layui-form-label">图像上传：</label>
+									<label class="layui-form-label">å¾åä¸ä¼ ï¼</label>
 									<div class="layui-input-block">
-										<input type="file" name="file（可随便定义）" class="layui-upload-file">
+										<input type="file" name="fileï¼å¯éä¾¿å®ä¹ï¼" class="layui-upload-file">
 									</div>
 								</div>
 								<div class="layui-form-item layui-form-text">
-									<label class="layui-form-label">菜品简介：</label>
+									<label class="layui-form-label">èåç®ä»ï¼</label>
 									<div class="layui-input-block">
-										<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+										<textarea placeholder="è¯·è¾å¥åå®¹" class="layui-textarea"></textarea>
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
-									<label class="layui-form-label">联系电话：</label>
+									<label class="layui-form-label">èç³»çµè¯ï¼</label>
 									<div class="layui-input-block">
-										<input type="text" name="listorder" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="100">
+										<input type="text" name="listorder" required lay-verify="required" placeholder="è¯·è¾å¥æåº" autocomplete="off" class="layui-input" value="100">
 									</div>
 								</div>
 								
 								
 								<div class="layui-form-item">
-									<label class="layui-form-label">状态：</label>
+									<label class="layui-form-label">ç¶æï¼</label>
 									<div class="layui-input-block">
-										<input type="text" name="count" required lay-verify="required" placeholder="请输入文章点击数" autocomplete="off" class="layui-input" value="100">
+										<input type="text" name="count" required lay-verify="required" placeholder="è¯·è¾å¥æç« ç¹å»æ°" autocomplete="off" class="layui-input" value="100">
 									</div>
 								</div>
 							
 								
 								<div class="layui-form-item layui-form-text">
-									<label class="layui-form-label">菜品详情：</label>
+									<label class="layui-form-label">èåè¯¦æï¼</label>
 									<div class="layui-input-block">
 										<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
 									</div>
@@ -73,8 +76,8 @@
 					</div>
 					<div class="layui-form-item" style="padding-left: 10px;">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
-							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">ç«å³æäº¤</button>
+							<button type="reset" class="layui-btn layui-btn-primary">éç½®</button>
 						</div>
 					</div>
 				</form>
@@ -92,8 +95,8 @@
 				listOrderAll: '/admin/category/listorderall.html'
 			}
 		</script>
-		<script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'common', 'tool', 'element', 'upload', 'layedit'], function() {
 				var form = layui.form(),
@@ -107,25 +110,25 @@
 					element = layui.element(),
 					dialog = layui.dialog;
 
-				//获取当前iframe的name值
+				//è·åå½åiframeçnameå¼
 				var iframeObj = $(window.frameElement).attr('name');
-				//创建一个编辑器
+				//åå»ºä¸ä¸ªç¼è¾å¨
 				var editIndex = layedit.build('LAY_demo_editor', {
-					tool: ['strong' //加粗
-						, 'italic' //斜体
-						, 'underline' //下划线
-						, 'del' //删除线
-						, '|' //分割线
-						, 'left' //左对齐
-						, 'center' //居中对齐
-						, 'right' //右对齐
-						, 'link' //超链接
-						, 'unlink' //清除链接
-						, 'image' //插入图片
+					tool: ['strong' //å ç²
+						, 'italic' //æä½
+						, 'underline' //ä¸åçº¿
+						, 'del' //å é¤çº¿
+						, '|' //åå²çº¿
+						, 'left' //å·¦å¯¹é½
+						, 'center' //å±ä¸­å¯¹é½
+						, 'right' //å³å¯¹é½
+						, 'link' //è¶é¾æ¥
+						, 'unlink' //æ¸é¤é¾æ¥
+						, 'image' //æå¥å¾ç
 					],
 					height: 100
 				})
-				//全选
+				//å¨é
 				form.on('checkbox(allChoose)', function(data) {
 					var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
 					child.each(function(index, item) {
@@ -136,9 +139,9 @@
 				form.render();
 
 				layui.upload({
-					url: '上传接口url',
+					url: 'ä¸ä¼ æ¥å£url',
 					success: function(res) {
-						console.log(res); //上传成功返回值，必须为json格式
+						console.log(res); //ä¸ä¼ æåè¿åå¼ï¼å¿é¡»ä¸ºjsonæ ¼å¼
 					}
 				});
 			});

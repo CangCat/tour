@@ -43,6 +43,12 @@ public class CommentServiceImpl implements CommentService {
 		return bean;
 	}
 	
+	@Override
+	public Integer toDel(Comment comment){
+		int delete = mapper.delete(comment);
+		return delete;
+	}
+	
 	
 	
 	

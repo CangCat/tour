@@ -13,4 +13,9 @@ public interface CommentService {
 	int selectCount(Comment comment);
 	
 	PageBean<Comment> selectAllByPage(int page,int size,Comment comment);
+
+
+	Integer toDel(Comment comment);
+	
+	
 }

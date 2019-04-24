@@ -30,8 +30,8 @@ public class CommentController {
 	
 	@RequestMapping("doList")
 	@ResponseBody
-	public Map doList(Comment comment,Integer page,Integer limit){
-		Map map = new HashMap();
+	public Map<String, Object> doList(Comment comment,Integer page,Integer limit){
+		Map<String, Object> map = new HashMap<String, Object>();
 		  PageBean<Comment> bean = service.selectAllByPage(page, limit, comment);
 		int i = service.selectCount(comment);
 		map.put("count", i);
@@ -46,4 +46,24 @@ public class CommentController {
 		
 		return "admin/index/comment-list";
 	}
+	
+	@RequestMapping("toAdd")
+	public String toAdd(){
+		return "admin/index/comment-add";
+	}
+	
+	@RequestMapping("tomodi")
+	public String tomodi(Integer id){
+		System.out.println(id);
+		return "admin/index/comment-detail";
+	}
+	
+	@RequestMapping("toDel")
+	public String toDel(List<Integer> id){
+		
+		
+		return "admin/index/comment-detail";
+	}
+	
+		
 }
