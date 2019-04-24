@@ -24,7 +24,9 @@
 								<button class="layui-btn layui-btn-small layui-btn-normal addBtn"
 										data-url="${path}/scenic/toScenicAdd"><i class="layui-icon">&#xe654;</i>
 								</button>
-								<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="scenic-add.html"><i class="layui-icon">&#xe640;</i></button>
+                                <button class="layui-btn layui-btn-small layui-btn-danger delBtn"
+                                        data-url="${path}/scenic/deleteByIds"><i class="layui-icon">&#xe640;</i>
+                                </button>
 								<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="scenic-add.html"><i class="iconfont">&#xe656;</i></button>
 							</div>
 							<div class="layui-inline">
@@ -78,7 +80,8 @@
 							<tbody>
                             <c:forEach var="scenic" items="${list}">
                                 <tr>
-                                    <td><input type="checkbox" name="" lay-skin="primary" data-id="1"></td>
+                                    <td><input type="checkbox" name="checkbox" lay-skin="primary"
+                                               data-id="${scenic.scenicId}"></td>
                                     <th class="hidden-xs">${scenic.scenicId}</th>
                                     <th>${scenic.scenicName}</th>
                                     <th class="hidden-xs">${scenic.scenicIntro}</th>

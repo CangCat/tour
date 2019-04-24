@@ -50,4 +50,14 @@ public interface ScenicService {
      */
     int deleteByIds(String ids);
 
+
+    /**
+     * 保存一个实体，null的属性也会保存，不会使用数据库默认值
+     *
+     * @param scenic
+     * @return
+     */
+    int insert(Scenic scenic);
+
+
 }

@@ -1,7 +1,7 @@
 package cn.team.service.cangcat.impl;
 
 import cn.team.entity.Scenic;
-import cn.team.mapper.ScenicMapper;
+import cn.team.mapper.cangcat.ScenicMapper;
 import cn.team.service.cangcat.ScenicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +48,11 @@ public class ScenicServiceImpl implements ScenicService {
     @Override
     public int deleteByIds(String ids) {
         return scenicMapper.deleteByIds(ids);
+    }
+
+    @Override
+    public int insert(Scenic scenic) {
+        return 0;
     }
 
 }

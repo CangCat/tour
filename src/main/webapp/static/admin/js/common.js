@@ -13,6 +13,7 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
 	var iframeObj = $(window.frameElement).attr('name');
 	//全选
 	form.on('checkbox(allChoose)', function(data) {
+		console.log(data);
 		var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
 		child.each(function(index, item) {
 			item.checked = data.elem.checked;
@@ -55,10 +56,18 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
 	//顶部批量删除
 	$('.delBtn').click(function() {
 		var url=$(this).attr('data-url');
+		var ids = $(":checkbox[name='checkbox']:checked");
+		var list = new Array();
+		ids.each(function (i) {
+			var id = $(ids[i]).attr('data-id');
+			list[i] = id;
+			console.log(list[i]);
+		})
 		dialog.confirm({
 			message:'您确定要删除选中项',
 			success:function(){
 				layer.msg('删除了')
+				location.href = url + "/" + list;
 			},
 			cancel:function(){
 				layer.msg('取消了')
@@ -88,6 +97,7 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
 				layer.msg('确定了')
 				console.log(url);
 				console.log(id);
+				console.log(url + "/" + id)
 				location.href = url + "/" + id;
 			},
 			cancel:function(){
