@@ -2,13 +2,25 @@ package cn.team.entity;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import tk.mybatis.mapper.annotation.KeySql;
+
+@Table
 public class Travels {
+	
+	@Id
+	@KeySql(useGeneratedKeys=true)
     private Integer travelId;
 
     private Integer userId;
 
     private Integer scenicId;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
 
     private Integer prefaction;
@@ -102,4 +114,12 @@ public class Travels {
     public void setIntro(String intro) {
         this.intro = intro == null ? null : intro.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Travels [travelId=" + travelId + ", userId=" + userId + ", scenicId=" + scenicId + ", createTime="
+				+ createTime + ", prefaction=" + prefaction + ", lookNum=" + lookNum + ", picture=" + picture
+				+ ", status=" + status + ", likeNum=" + likeNum + ", intro=" + intro + "]";
+	}
+    
 }
