@@ -1,6 +1,7 @@
 package cn.team.service.cangcat;
 
 import cn.team.entity.Scenic;
+import cn.team.utils.PageBean;
 
 import java.util.List;
 
@@ -59,5 +60,21 @@ public interface ScenicService {
      */
     int insert(Scenic scenic);
 
+    /**
+     * 根据实体中的属性查询总数，查询条件使用等号
+     *
+     * @param scenic
+     * @return
+     */
+    int selectCount(Scenic scenic);
 
+    /**
+     * 查询 所有 并且分页
+     *
+     * @param page
+     * @param size
+     * @param scenic
+     * @return
+     */
+    PageBean<Scenic> selectAllByPage(int page, int size, Scenic scenic);
 }

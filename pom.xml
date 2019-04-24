@@ -98,14 +98,7 @@
             <version>2.1.4</version>
         </dependency>
 
-	<!-- https://mvnrepository.com/artifact/com.google.code.kaptcha/kaptcha -->
-		<!-- <dependency>
-		    <groupId>com.google.code.kaptcha</groupId>
-		    <artifactId>kaptcha</artifactId>
-		    <version>${kaptcha-ver}</version>
-		</dependency> -->
-
-
+	
     </dependencies>
 
     <build>

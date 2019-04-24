@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="${path}/static/admin/css/admin.css"/>
 	</head>
 	<body>
-	<form class="layui-form column-content-detail">
+	<form class="layui-form column-content-detail" action="${path}/scenic/insert" method="post">
 					<div class="layui-tab" style="margin: 0;">
 						<div class="layui-tab-content">
 							<div class="layui-tab-item"></div>
@@ -22,14 +22,15 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">景点名称：</label>
 									<div class="layui-input-block">
-										<input type="text" name="scenicName" required lay-verify="required"
-											   placeholder="请输入文章名称" autocomplete="off" class="layui-input">
+										<input type="text" name="scenicName" required
+											   lay-verify="required"            <%--  景点名称  --%>
+											   placeholder="请输入景点名称" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">景区分类：</label>
 									<div class="layui-input-block">
-										<select name="typeOne" lay-verify="required">
+										<select name="typeOne" lay-verify="required">            <%--  分类1  --%>
 											<option value="">请选择分类</option>
 											<optgroup <%--label="国内游"--%>>
 												<option value="1" selected="">省内游</option>
@@ -43,86 +44,99 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">图像上传：</label>
 									<div class="layui-input-block">
-										<input type="file" name="file" class="layui-upload-file">
+										<input type="file" name="scenicPic" class="layui-upload-file"><%--  景点图片  --%>
+										<%--										<i class="layui-icon">&#xe67c;</i>上传图片--%>
 									</div>
 								</div>
 								<div class="layui-form-item">
-									<label class="layui-form-label">标签：</label>
+									<label class="layui-form-label">二级分类：</label>
 									<div class="layui-input-block">
-										<input type="checkbox" name="label[tj]" title="热门主题" checked>
-										<input type="checkbox" name="label[zd]" title="热门目的地">
-										<input type="checkbox" name="label[hot]" title="自由行">
-										<input type="checkbox" name="label[zd]" title="跟团游">
-										<input type="checkbox" name="label[hot]" title="邮轮游">
+										<select name="typeTwo" lay-verify="required">            <%--  分类1  --%>
+											<option value="">请选择二级分类</option>
+											<optgroup <%--label="热门主题"--%>>
+												<option value="1" selected="">热门主题</option>
+												<option value="2">热门目的地</option>
+												<option value="3">自由行</option>
+												<option value="4">跟团</option>
+												<option value="5">邮轮游</option>
+											</optgroup>
+										</select>
 									</div>
 								</div>
 								<div class="layui-form-item layui-form-text">
 									<label class="layui-form-label">景点简介：</label>
 									<div class="layui-input-block">
-										<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+										<textarea placeholder="请输入内容" name="scenicIntro"
+												  class="layui-textarea"></textarea>
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">详细地址：</label>
 									<div class="layui-input-block">
-										<input type="text" name="laiyuan" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+										<input type="text" name="scenicAddress" placeholder="请输入详细地址" autocomplete="off"
+											   class="layui-input">
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">联系人：</label>
 									<div class="layui-input-block">
-										<input type="text" name="laiyuan" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" class="layui-input">
+										<input type="text" name="scenicLink" required lay-verify="required"
+											   placeholder="请输入文章来源" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">联系人手机号：</label>
 									<div class="layui-input-block">
-										<input type="text" name="listorder" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="100">
+										<input type="text" name="scenicTel" required lay-verify="required"
+											   placeholder="请输入排序" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">收费金额：</label>
 									<div class="layui-input-block">
-										<input type="number" name="listorder" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="100">
+										<input type="number" name="scenicCharge" required lay-verify="required"
+											   placeholder="请输入排序" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">开放时间：</label>
 									<div class="layui-input-block">
-										<input type="datetime" name="listorder" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="100">
+										<input type="datetime" name="openTime" required lay-verify="required"
+											   placeholder="请输入排序" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">结束时间：</label>
 									<div class="layui-input-block">
-										<input type="datetime" name="listorder" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="100">
+										<input type="datetime" name="endTime" required lay-verify="required"
+											   placeholder="请输入排序" autocomplete="off" class="layui-input">
 									</div>
 								</div>
-								
-								<div class="layui-form-item">
-									<label class="layui-form-label">状态：</label>
-									<div class="layui-input-block">
-										<input type="text" name="count" required lay-verify="required" placeholder="请输入文章点击数" autocomplete="off" class="layui-input" value="100">
-									</div>
-								</div>
-							
-								<div class="layui-form-item">
-									<label class="layui-form-label">点击数：</label>
-									<div class="layui-input-block">
-										<input type="number" name="count" required lay-verify="required" placeholder="请输入文章点击数" autocomplete="off" class="layui-input" value="100">
-									</div>
-								</div>
-								
-								<div class="layui-form-item layui-form-text">
-									<label class="layui-form-label">景点详情：</label>
-									<div class="layui-input-block">
-										<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
-									</div>
-								</div>
+
+								<%--								<div class="layui-form-item">--%>
+								<%--									<label class="layui-form-label">状态：</label>--%>
+								<%--									<div class="layui-input-block">--%>
+								<%--										<input type="text" name="count" required lay-verify="required" placeholder="请输入文章点击数" autocomplete="off" class="layui-input" >--%>
+								<%--									</div>--%>
+								<%--								</div>--%>
+
+								<%--								<div class="layui-form-item">--%>
+								<%--									<label class="layui-form-label">点击数：</label>--%>
+								<%--									<div class="layui-input-block">--%>
+								<%--										<input type="number" name="count" required lay-verify="required" placeholder="请输入文章点击数" autocomplete="off" class="layui-input" >--%>
+								<%--									</div>--%>
+								<%--								</div>--%>
+
+								<%--								<div class="layui-form-item layui-form-text">--%>
+								<%--									<label class="layui-form-label">景点详情：</label>--%>
+								<%--									<div class="layui-input-block">--%>
+								<%--										<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>--%>
+								<%--									</div>--%>
+								<%--								</div>--%>
 							</div>
 						</div>
 					</div>
@@ -177,7 +191,7 @@
 					form.render('checkbox');
 				});
 				form.render();
-
+			console.log(from);
 				layui.upload({
 					url: '上传接口url',
 					success: function(res) {
