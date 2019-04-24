@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2019/4/22 17:13
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ScenicorderServiceImpl implements ScenicorderService {
 
 }

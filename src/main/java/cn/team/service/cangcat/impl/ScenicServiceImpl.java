@@ -3,6 +3,7 @@ package cn.team.service.cangcat.impl;
 import cn.team.entity.Scenic;
 import cn.team.mapper.cangcat.ScenicMapper;
 import cn.team.service.cangcat.ScenicService;
+import cn.team.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.List;
  * @date 2019/4/22 17:11
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ScenicServiceImpl implements ScenicService {
 
     @Autowired
@@ -52,7 +53,21 @@ public class ScenicServiceImpl implements ScenicService {
 
     @Override
     public int insert(Scenic scenic) {
-        return 0;
+        return scenicMapper.insert(scenic);
+    }
+
+    @Override
+    public int selectCount(Scenic scenic) {
+        return scenicMapper.selectCount(scenic);
+    }
+
+    @Override
+    public PageBean<Scenic> selectAllByPage(int page, int size, Scenic scenic) {
+        int count = scenicMapper.selectCount(scenic);
+        PageBean<Scenic> bean = new PageBean<Scenic>(size, page, count);
+        List<Scenic> list = scenicMapper.selectAllByPage(bean.getStartIndex(), size);
+        bean.setList(list);
+        return bean;
     }
 
 }
