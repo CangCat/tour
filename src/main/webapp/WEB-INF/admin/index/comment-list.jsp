@@ -76,7 +76,7 @@
 				      ,{field: 'userId', title: 'userId', width:80}
 				      ,{field: 'projectId', title: '类别', width:80, }
 				      ,{field: 'commIntro', title: '评论内容', width:177} 
-				      ,{field: 'commTime', title: '评论时间', width: 80}
+				      ,{field: 'commTime', title: '评论时间', width: 80,templet : "<div>{{layui.util.toDateString(d.ordertime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
 				      ,{field: 'perfection', title: '满意度 ', width: 80, }
 				      ,{field: 'status', title: '状态', width: 80, }
 				      ,{field: 'lookNum', title: '查看人数', width: 80}
