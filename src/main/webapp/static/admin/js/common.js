@@ -56,7 +56,7 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
 	//顶部批量删除
 	$('.delBtn').click(function() {
 		var url=$(this).attr('data-url');
-		var ids = $(":checkbox[name='checkbox']:checked");
+		var ids = $("table:checkbox:checked");
 		var list = new Array();
 		ids.each(function (i) {
 			var id = $(ids[i]).attr('data-id');

@@ -164,7 +164,7 @@
 							</tbody>
 						</table>--%>
 						<table class="layui-table" id="table" lay-filter="test" lay-data="{id:'list'}"></table>
-						<div class="page-wrap">
+						<%--<div class="page-wrap">
 							<ul class="pagination">
 								<li class="disabled"><span>«</span></li>
 								<li class="active"><span>1</span></li>
@@ -175,7 +175,7 @@
 									<a href="#">»</a>
 								</li>
 							</ul>
-						</div>
+						</div>--%>
 					</div>
 				</div>
 		</div>
@@ -206,7 +206,8 @@
 				, page: true /*{limit:5}*/ //开启分页
 				, id: 'list'
 				, cols: [[ //表头
-					{checkbox: true, fixed: true, name: "checkbox", templet: "#id"}
+					{}
+					,{checkbox: true, fixed: true, name: "checkbox", templet: "#id"}
 					, {field: 'scenicId', title: 'ID', width: 50, fixed: 'left', id: "id"}
 					, {field: 'scenicName', title: '景区名称', width: 80}
 					, {field: 'scenicIntro', title: '景区简介', width: 80}
