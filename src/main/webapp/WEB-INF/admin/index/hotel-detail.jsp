@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -6,37 +9,43 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
+		<title>酒店后台管理模版</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/admin/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/admin/css/admin.css" />
+		
 	</head>
-
+	
 	<body>
 		<div class="page-content-wrap">
-				<form class="layui-form">
+				<form class="layui-form" action="${pageContext.request.contextPath }/hotel/doHotelDetailUpdate" method="post">
 					<div class="layui-tab" style="margin: 0;">
 						<ul class="layui-tab-title">
-							<li><a href="hotel-list.html">酒店列表</a></li>
+							<li><a href="${pageContext.request.contextPath }/hotel/toPageList">酒店列表</a></li>
 							<li class="layui-this">酒店详情</li>
 							
 						</ul>
+						
 						<div class="layui-tab-content">
 							<div class="layui-tab-item"></div>
 							<div class="layui-tab-item layui-show">
+							
+								
 								<div class="layui-form-item">
 									<label class="layui-form-label">酒店名称：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入酒店名称" autocomplete="off" class="layui-input">
+										<input type="text" name="hotelName"  class="layui-input" value="${hoteles.hotelName }">
+										<input type="hidden" name="hotelId" value="${hoteles.hotelId }">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">所属景区：</label>
 									<div class="layui-input-block">
-										<select name="category" lay-verify="required">
+										<select name="scenicId" lay-verify="required">
 											<option value="">请选择景区</option>
 											<optgroup label="国内游">
-												<option value="1" selected="">大夫山</option>
-												<option value="2">长隆水上乐园</option>
+												<c:forEach items="${scenic }" var="s">
+												<option value="${s.scenicId }">${s.scenicName }</option>
+												</c:forEach>
 											</optgroup>
 										</select>
 									</div>
@@ -44,76 +53,80 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">图像上传：</label>
 									<div class="layui-input-block">
-										<input type="file" name="file（可随便定义）" class="layui-upload-file">
+										<input type="file" name="hotelPic" class="layui-upload-file" value="">
+										<img src="${hoteles.hotelPic }">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">酒店级别：</label>
 									<div class="layui-input-block">
-										<input type="checkbox" name="label[tj]" title="五星级" checked>
-										<input type="checkbox" name="label[zd]" title="四星级">
+										<input type="checkbox" name="hotelClass"  checked value="${hoteles.hotelClass }">
+										
 									</div>
 								</div>
 								<div class="layui-form-item layui-form-text">
 									<label class="layui-form-label">酒店简介：</label>
 									<div class="layui-input-block">
-										<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+										<textarea placeholder="" class="layui-textarea" name="" >${hoteles.hotelDes  }</textarea>
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">详细地址：</label>
 									<div class="layui-input-block">
-										<input type="text" name="laiyuan" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+										<input type="text" name="hotelAddress" value="${hoteles.hotelAddress }" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">联系人：</label>
 									<div class="layui-input-block">
-										<input type="text" name="laiyuan" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" class="layui-input">
+										<input type="text" name="hotelLink" value="${hoteles.hotelLink }" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" class="layui-input">
 									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">联系人手机号：</label>
 									<div class="layui-input-block">
-										<input type="text" name="listorder" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="100">
+										<input type="text" name="hotelTel" required lay-verify="required" placeholder="" value="${hoteles.hotelTel }" autocomplete="off" class="layui-input" value="100">
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">状态：</label>
 									<div class="layui-input-block">
-										<input type="text" name="count" required lay-verify="required" placeholder="请输入文章点击数" autocomplete="off" class="layui-input" value="100">
+										<input type="text" name="status" required lay-verify="required" placeholder="" value="${hoteles.status }" autocomplete="off" class="layui-input" value="100">
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">创建时间：</label>
 									<div class="layui-input-block">
-										<input type="text" name="count" required lay-verify="required" placeholder="请输入文章点击数" autocomplete="off" class="layui-input" value="100">
+										
+										<input type="text" name="creatTime" placeholder="" value="<fmt:formatDate value="${hoteles.creatTime }" pattern="yyyy-MM-dd hh:mm:ss"/>" autocomplete="off" class="layui-input" value="100">
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
 									<label class="layui-form-label">点击数：</label>
 									<div class="layui-input-block">
-										<input type="number" name="count" required lay-verify="required" placeholder="请输入酒店点击数" autocomplete="off" class="layui-input" value="100">
+										<input id="test1" type="number" name="hotelCount" required lay-verify="required"  autocomplete="off" class="layui-input" value="${hoteles.hotelCount }">
 									</div>
 								</div>
 								
 								<div class="layui-form-item layui-form-text">
-									<label class="layui-form-label">景点详情：</label>
+									<label class="layui-form-label">酒店详情：</label>
 									<div class="layui-input-block">
-										<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+										<textarea class="layui-textarea layui-hide" name="hotelPic" lay-verify="content" id="LAY_demo_editor">${hoteles.hotelPic }</textarea>
 									</div>
 								</div>
+							
 							</div>
 						</div>
+						
 					</div>
 					<div class="layui-form-item" style="padding-left: 10px;">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">立即提交</button>
+							<button class="layui-btn layui-btn-normal" type="submit">立即提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						</div>
 					</div>
@@ -133,18 +146,19 @@
 				listOrderAll: '/admin/category/listorderall.html'
 			}
 		</script>
-		<script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+		
 		<script>
 			
 			layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',  'element', 'upload', 'layedit'], function() {
-				var form = layui.form(),
+				var form = layui.form,
 					layer = layui.layer,
 					$ = layui.jquery,
 					laypage = layui.laypage,
 					laydate = layui.laydate,
 					layedit = layui.layedit,
-					element = layui.element(),
+					element = layui.element,
 					dialog = layui.dialog;
 
 				//获取当前iframe的name值
@@ -175,12 +189,12 @@
 				});
 				form.render();
 
-				layui.upload({
+				/* layui.upload({
 					url: '上传接口url',
 					success: function(res) {
 						console.log(res); //上传成功返回值，必须为json格式
 					}
-				});
+				}); */
 			});
 		</script>
 	</body>

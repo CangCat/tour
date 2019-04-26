@@ -2,28 +2,79 @@ package cn.team.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name="hotel")
+
 public class Hotel {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="hotel_id")
     private Integer hotelId;
 
+	@Column(name="scenic_id")
     private Integer scenicId;
 
+	@Column(name="hotel_class")
     private String hotelClass;
 
+	@Column(name="hotel_name")
     private String hotelName;
 
+	@Column(name="hotel_link")
     private String hotelLink;
 
+	@Column(name="hotel_tel")
     private String hotelTel;
 
+	@Column(name="hotel_address")
     private String hotelAddress;
 
+	@Column(name="hotel_pic")
     private String hotelPic;
 
+	@Column(name="status")
     private String status;
 
+	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	@Column(name="creat_time")
     private Date creatTime;
 
-    public Integer getHotelId() {
+	@Column(name="hotel_des")
+	private String hotelDes;
+	
+	@Column(name="hotel_count")
+	private Integer hotelCount;
+	
+	
+	
+    public Integer getHotelCount() {
+		return hotelCount;
+	}
+
+	public void setHotelCount(Integer hotelCount) {
+		this.hotelCount = hotelCount;
+	}
+
+	public String getHotelDes() {
+		return hotelDes;
+	}
+
+	public void setHotelDes(String hotelDes) {
+		this.hotelDes = hotelDes;
+	}
+
+	public Integer getHotelId() {
         return hotelId;
     }
 
@@ -102,4 +153,15 @@ public class Hotel {
     public void setCreatTime(Date creatTime) {
         this.creatTime = creatTime;
     }
+
+	@Override
+	public String toString() {
+		return "Hotel [hotelId=" + hotelId + ", scenicId=" + scenicId + ", hotelClass=" + hotelClass + ", hotelName="
+				+ hotelName + ", hotelLink=" + hotelLink + ", hotelTel=" + hotelTel + ", hotelAddress=" + hotelAddress
+				+ ", hotelPic=" + hotelPic + ", status=" + status + ", creatTime=" + creatTime + ", hotelDes="
+				+ hotelDes + ", hotelCount=" + hotelCount + "]";
+	}
+
+	
+    
 }
