@@ -25,15 +25,13 @@
 	<body>
 		<div class="wrap-container clearfix">
 				<div class="column-content-detail">
-					<form class="layui-form" action="">
+					<%--<form class="layui-form" action="">
 						<div class="layui-form-item">
 							<div class="layui-inline tool-btn">
 								<button class="layui-btn layui-btn-small layui-btn-normal addBtn"
 										data-url="${path}/scenic/toScenicAdd"><i class="layui-icon">&#xe654;</i>
 								</button>
-                                <button class="layui-btn layui-btn-small layui-btn-danger delBtn"
-                                        data-url="${path}/scenic/deleteByIds"><i class="layui-icon">&#xe640;</i>
-                                </button>
+                                <button class="layui-btn layui-btn-danger" onclick="deletes()"><i class="layui-icon">&#xe640;</i></button>
 								<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="scenic-add.html"><i class="iconfont">&#xe656;</i></button>
 							</div>
 							<div class="layui-inline">
@@ -51,7 +49,7 @@
 							</div>
 							<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
 						</div>
-					</form>
+					</form>--%>
 					<div class="layui-form" id="table-list">
 						<%--<table class="layui-table" lay-even lay-skin="nob">
 							<colgroup>
@@ -186,28 +184,65 @@
 
     <script type="text/javascript">
 
+		var scenicIds = "";
+
 		layui.use('table', function () {
 			var table = layui.table;
 
-			table.on('checkbox(test)', function (obj) {
-				var checkStatus = table.checkStatus('list');
-				console.log(checkStatus.data);
-				var os = checkStatus.data;
-				$(os).each(function (i) {
-					console.log(os[i].scenicId);
-				})
-			})
+			// table.on('checkbox(test)', function (obj) {
+			// 	var checkStatus = table.checkStatus('list');
+			// 	console.log(checkStatus.data);
+			// 	var os = checkStatus.data;
+			// 	this.scenicIds = "";
+			// 	$(os).each(function (i) {
+			// 		this.scenicIds += os[i].scenicId+",";
+			// 	})
+			// 	console.log(this.scenicIds);
+			// })
 
+
+			table.on('toolbar(test)', function(obj){
+				console.log(obj)
+				var checkStatus = table.checkStatus(obj.config.id);
+				var data = checkStatus.data;
+
+				switch(obj.event){
+					case 'add':
+						window.location.href="/tour/scenic/toScenicAdd"
+						break;
+					case 'update':
+						if(data.length === 0){
+							layer.msg('请选择一行');
+						} else if(data.length > 1){
+							layer.msg('只能同时编辑一个');
+						} else {
+							window.location.href="/tour/scenic/toUpdate/"+checkStatus.data[0].scenicId;
+						}
+						break;
+					case 'delete':
+						if(data.length === 0){
+							layer.msg('请选择一行');
+						} else {
+							var ids = "";
+							$(data).each(function (i) {
+								ids += data[i].scenicId+",";
+							})
+							location.href="${path}/scenic/deleteByIds/"+ids;
+						}
+						break;
+				};
+
+		})
 
 			table.render({
 				elem: '#table'
-				, height: 486
+				, height: 520
 				, url: '${path}/scenic/doList' //数据接口
 				, page: true /*{limit:5}*/ //开启分页
 				, id: 'list'
+				,toolbar: "default"
 				, cols: [[ //表头
-					{}
-					,{checkbox: true, fixed: true, name: "checkbox", templet: "#id"}
+					{checkbox: true, fixed: true}
 					, {field: 'scenicId', title: 'ID', width: 50, fixed: 'left', id: "id"}
 					, {field: 'scenicName', title: '景区名称', width: 80}
 					, {field: 'scenicIntro', title: '景区简介', width: 80}
@@ -236,9 +271,22 @@
 					, {fixed: 'right', width: 130, title: '操作', align: 'center', toolbar: '#caozuo'}
 				]]
 			});
-
-
 		});
+		
+		function deletes() {
+			console.log(scenicIds)
+			$.ajax({
+				 url : "${path}/scenic/deleteByIds/"+scenicIds
+				,type : post
+				,success : function (data) {
+					console.log("11")
+				}
+				,error : function (data) {
+					console.log("112")
+				}
+			})
+		}
+
     </script>
 	<script type="text/html" id="checkType">
 		{{#   if(d.checkType == 0){ }}
@@ -249,8 +297,8 @@
 	</script>
 
 	<script type="text/html" id="caozuo">
-		<a class="layui-btn layui-btn-xs" lay-event="edit"
-		   href="${pageContext.request.contextPath}/scenic/toUpdate/{{d.scenicId}}">编辑</a>
+		<%--<a class="layui-btn layui-btn-xs" lay-event="edit"
+		   href="${pageContext.request.contextPath}/scenic/toUpdate/{{d.scenicId}}">编辑</a>--%>
 		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"
 		   href="${pageContext.request.contextPath}/scenic/deleteByPrimaryKey/{{d.scenicId}}">删除</a>
 
@@ -260,6 +308,5 @@
 		{{#  } }}
 
 	</script>
-
 
 </html>

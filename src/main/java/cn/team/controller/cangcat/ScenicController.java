@@ -2,6 +2,7 @@ package cn.team.controller.cangcat;
 
 import cn.team.entity.Scenic;
 import cn.team.service.cangcat.ScenicService;
+import cn.team.utils.FileUtil;
 import cn.team.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,20 +81,33 @@ public class ScenicController {
      */
     @RequestMapping("deleteByIds/{ids}")
     public String deleteByIds(@PathVariable String ids) {
-        scenicService.deleteByIds(ids);
+        System.out.println(ids);
+        String substring = ids.substring(0,ids.length() - 1);
+        System.out.println(substring);
+        scenicService.deleteByIds(substring);
         return "redirect:/scenic/toScenicList";
     }
 
     @RequestMapping("insert")
-    public String insert(Scenic scenic, MultipartFile file) {
+    public String insert(Scenic scenic, MultipartFile file, HttpServletRequest request) {
         System.out.println("进入");
         System.out.println(scenic.toString());
         System.out.println(file.getOriginalFilename());
+        String contentType = file.getContentType();
+        String fileName = file.getOriginalFilename();
+        String filePath = request.getSession().getServletContext().getRealPath("imgupload/");
+        try {
+            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        scenic.setScenicPic(file.getOriginalFilename());
         int result = scenicService.insert(scenic);
         if(result!=0){
             return "redirect:/scenic/toScenicList";
         }
-        return null;
+        return "redirect:/scenic/toScenicList";
 
     }
 
@@ -121,7 +136,9 @@ public class ScenicController {
         for (MultipartFile multipartFile : file) {
             System.out.println(multipartFile.getOriginalFilename());
         }
+
         String ss = "{\"code\": 0,\"msg\": \"成功\",\"data\": {\"src\": \""+file+"\"}}";
+
         return ss;
     }
 
