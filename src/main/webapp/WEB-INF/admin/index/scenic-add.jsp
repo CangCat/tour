@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="${path}/static/admin/css/admin.css"/>
 	</head>
 	<body>
-	<form class="layui-form column-content-detail" action="${path}/scenic/insert" method="post">
+	<form class="layui-form column-content-detail" action="${path}/scenic/insert" method="post" enctype="multipart/form-data">
 					<div class="layui-tab" style="margin: 0;">
 						<div class="layui-tab-content">
 							<div class="layui-tab-item"></div>
@@ -44,8 +44,7 @@
 								<div class="layui-form-item">
 									<label class="layui-form-label">图像上传：</label>
 									<div class="layui-input-block">
-										<input type="file" name="scenicPic" class="layui-upload-file"><%--  景点图片  --%>
-										<%--										<i class="layui-icon">&#xe67c;</i>上传图片--%>
+										<input type="file" name="file"><%--  景点图片  --%>
 									</div>
 								</div>
 								<div class="layui-form-item">
@@ -200,5 +199,33 @@
 				});
 			});
 	</script>
+
+	<%--<script>
+		layui.use('upload', function(){
+			var upload = layui.upload;
+
+			//执行实例
+			var uploadInst = upload.render({
+				elem: '#test2' //绑定元素
+				,url: '${path}/scenic/saveImg' //上传接口
+				,multiple: true
+				,before: function(obj){
+					//预读本地文件示例，不支持ie8
+					obj.preview(function(index, file, result){
+						$('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+					});
+				}
+				,done: function(res){
+					//上传完毕回调
+					console.log(res);
+				}
+				,error: function(){
+					//请求异常回调
+					console.log("错误")
+				}
+			});
+		});
+	</script>--%>
+
 	</body>
 </html>

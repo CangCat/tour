@@ -1,5 +1,6 @@
 package cn.team.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
@@ -24,12 +25,14 @@ public class Scenicorder {
     private Integer account;
 
     //订单创建时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     //订单状态  0-下单成功  1-订单过时  2-订单删除
     private String status;
 
     //游玩时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date playTime;
 
     public Integer getOrderId() {
@@ -100,4 +103,5 @@ public class Scenicorder {
                 ", playTime=" + playTime +
                 '}';
     }
+
 }

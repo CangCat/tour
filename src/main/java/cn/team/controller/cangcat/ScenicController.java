@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,11 +84,16 @@ public class ScenicController {
     }
 
     @RequestMapping("insert")
-    public String insert(Scenic scenic) {
+    public String insert(Scenic scenic, MultipartFile file) {
         System.out.println("进入");
         System.out.println(scenic.toString());
-//        int result = scenicService.insert(scenic);
-        return "redirect:/scenic/toScenicList";
+        System.out.println(file.getOriginalFilename());
+        int result = scenicService.insert(scenic);
+        if(result!=0){
+            return "redirect:/scenic/toScenicList";
+        }
+        return null;
+
     }
 
     @RequestMapping("doList")
@@ -108,5 +114,17 @@ public class ScenicController {
         map.put("", scenicService.selectByPrimaryKey(id));
         return "admin/index/scenic-detail";
     }
+
+    @RequestMapping("saveImg")
+    @ResponseBody
+    public String saveImg(MultipartFile... file){
+        for (MultipartFile multipartFile : file) {
+            System.out.println(multipartFile.getOriginalFilename());
+        }
+        String ss = "{\"code\": 0,\"msg\": \"成功\",\"data\": {\"src\": \""+file+"\"}}";
+        return ss;
+    }
+
+
 
 }
