@@ -23,6 +23,13 @@ public class UsersOneServiceImpl implements UsersOneService {
 		return uo.selectAll();
 	}
 
+	@Override
+	public UsersOne UsersOneSelectOne(int id) {
+		// TODO Auto-generated method stub
+		return uo.selectByPrimaryKey(id);
+	}
+
+	
 	
 	
 	

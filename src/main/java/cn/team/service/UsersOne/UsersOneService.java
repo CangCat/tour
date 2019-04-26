@@ -8,4 +8,5 @@ public interface UsersOneService {
 
 	List<UsersOne> UsersOneSelectAll();
 	
+	UsersOne UsersOneSelectOne(int id);
 }
