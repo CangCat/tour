@@ -16,6 +16,9 @@ public interface CommentService {
 
 
 	Integer toDel(Comment comment);
+
+
+	Integer updateByPrimaryKeySelective(Comment comment);
 	
 	
 }

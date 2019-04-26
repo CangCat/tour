@@ -2,7 +2,14 @@ package cn.team.entity;
 
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+
 public class Comment {
+	
+	@javax.persistence.Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer commId;
 
     private Integer userId;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,11 +59,25 @@ public class CommentController {
 		return "admin/index/comment-detail";
 	}
 	
+	
+	//修改评论为不显示
 	@RequestMapping("toDel")
-	public String toDel(List<Integer> id){
+	public String toDel(@RequestParam(defaultValue="commId") List<Integer> commId){
 		
+		String msg = "删除失败";
+		Comment comment = new Comment();
+		for (Integer integer : commId) {
+			comment.setCommId(integer);
+			comment.setStatus("1");
+			System.out.println(comment);
+			Integer updateByPrimaryKey = service.updateByPrimaryKeySelective(comment);
+			if(updateByPrimaryKey!=0){
+				msg = "删除成功";
+			}
+		}
+		System.out.println(msg);
 		
-		return "admin/index/comment-detail";
+		return "forward:/comment/toList";
 	}
 	
 		

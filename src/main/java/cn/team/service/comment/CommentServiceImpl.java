@@ -49,7 +49,11 @@ public class CommentServiceImpl implements CommentService {
 		return delete;
 	}
 	
-	
+	@Override
+	public Integer updateByPrimaryKeySelective(Comment comment){
+		int updateByPrimaryKey = mapper.updateByPrimaryKeySelective(comment); 
+		return updateByPrimaryKey;
+	}
 	
 	
 	
