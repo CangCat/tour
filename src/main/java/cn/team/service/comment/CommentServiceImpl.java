@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
 	public PageBean<Comment> selectAllByPage(int page, int size,Comment comment) {
 		int count = mapper.selectCount(comment);
 		PageBean<Comment> bean = new PageBean<Comment>(size,page,count);
-		List<Comment> list = mapper.selectAllByPage(bean.getStartIndex(), size);
+		List<Comment> list = mapper.selectAllByPage(bean.getStartIndex(), size, comment);
 		
 		bean.setList(list);
 		
@@ -55,7 +55,16 @@ public class CommentServiceImpl implements CommentService {
 		return updateByPrimaryKey;
 	}
 	
-	
+	@Override
+	public PageBean<Comment> selectAllByPage1(int page, int size,Comment comment) {
+		int count = mapper.selectCount(comment);
+		PageBean<Comment> bean = new PageBean<Comment>(size,page,count);
+		List<Comment> list = mapper.selectAllByPage(bean.getStartIndex(), size, comment);
+		
+		bean.setList(list);
+		
+		return bean;
+	}
 	
 	
 }

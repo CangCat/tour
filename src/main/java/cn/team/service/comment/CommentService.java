@@ -19,6 +19,9 @@ public interface CommentService {
 
 
 	Integer updateByPrimaryKeySelective(Comment comment);
+
+
+	PageBean<Comment> selectAllByPage1(int page, int size, Comment comment);
 	
 	
 }

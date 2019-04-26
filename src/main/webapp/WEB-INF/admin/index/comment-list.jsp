@@ -9,7 +9,7 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>éåº</title>
+		<title>酒店	</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/admin/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/admin/css/admin.css" />
 	</head>
@@ -17,22 +17,17 @@
 	<body>
 		<div class="wrap-container clearfix">
 				<div class="column-content-detail">
-					<form class="layui-form" action="${pageContext.request.contextPath}/comment/toDel">
+					<form class="layui-form" action="${pageContext.request.contextPath}/comment/doList">
 						<div class="layui-form-item">
-							<div class="layui-inline tool-btn">
-								<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="${pageContext.request.contextPath}/comment/toAdd"><i class="layui-icon">&#xe654;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-danger "  data-type="getCheckData" type="button"><i class="layui-icon">&#xe640;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="comment-add.html"><i class="iconfont">&#xe656;</i></button>
+							
+							<div class="layui-inline">
+								<input type="text" name="commIntro" required lay-verify="required" placeholder="请输入景点" autocomplete="off" class="layui-input">
 							</div>
 							<div class="layui-inline">
-								<input type="text" name="title" required lay-verify="required" placeholder="请输入景点" autocomplete="off" class="layui-input">
-							</div>
-							<div class="layui-inline">
-								<select name="states" lay-filter="status">
+								<select name="status" lay-filter="status">
 									<option value="">请选择一个状态</option>
-									<option value="010">正常</option>
-									<option value="021">停止</option>
-									<option value="0571">删除</option>
+									<option value="0">正常</option>
+									<option value="1">不显示</option>
 								</select>
 							</div>
 							<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
@@ -64,7 +59,7 @@
 		<!-- 每条数据的工具栏 -->
 		<script type="text/html" id="barDemo">
  			 <a class="layui-btn layui-btn-xs" lay-event="edit"  href="${pageContext.request.contextPath}/comment/tomodi?id={{d.commId}}">编辑</a>
- 			 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" href="${pageContext.request.contextPath}/comment/toDel?commId={{d.commId}}">删除</a>
+ 			 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" method="offset" data-type="auto" href="javascript:;">删除</a>
   
  			 <!-- 这里同样支持 laytpl 语法，如： -->
  			 {{#  if(d.auth > 2){ }}
@@ -89,6 +84,13 @@
 				餐厅
 			 {{# } }}
 		</script>
+		<script type="text/html" id="toolbarDemo">
+ 			 <div class="layui-btn-container">
+   			 	<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+   				<button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+    			<button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+ 			 </div>
+	    </script>
 		
 		
 		
@@ -96,35 +98,9 @@
 			
 			layui.use(['table','jquery','layer'], function(){
 				  var table = layui.table;
+				  var layer = layui.layer;
+				  var $ = layui.$;
 				  
-				  var $ = layui.$,active = {
-						  getCheckData: function(){
-							var checkStatus = table.checkStatus('idTest')
-							,data = checkStatus.data;
-							
-							if(data !=""){
-								var ids = "";
-								for(var i = 0 ; i<data.length;i++){
-									ids += data[i]+",";
-								}
-								console.log(ids);
-							}
-							
-							layer.confirm('确定要删除码？'+ids,function(index){
-								$.ajax({
-									type:"post"
-									,url:"${pageContext.request.contextPath}/comment/toDel"
-									,data:{"ids":ids}
-									,success:function(data){
-										alert("Data saved: "+msg);
-									}
-								});
-								layer.msg('删除成功！',{icon:1});
-								$(".layui-form-checked").not('.header').parents('tr').remove;
-							});
-						  }  
-						  
-				  };
 				  
 				  
 				  table.on('checkbox(test)', function (obj) {
@@ -136,14 +112,35 @@
 						})
 					})
 				  
+					table.on('toolbar(test)', function(obj){
+					  var checkStatus = table.checkStatus(obj.config.id);
+					  switch(obj.event){
+					    
+					    case 'delete':
+					      layer.msg('删除');
+					      var os = checkStatus.data;
+					      var list = "";
+					      for(var i =0;i<os.length;i++){
+					    	 list+=os[i].commId+",";
+					      }
+					      console.log(list);
+					      window.location.href="${pageContext.request.contextPath}/comment/toDel?list="+list;
+					    break;
+					    
+					    case 'update':
+					      layer.msg('编辑');
+					    break;
+					  };
+					});
 				 
 				  //第一个实例
 				  table.render({
 				    elem: '#table'
 				    ,id:'idTest'
-				    ,height: 312
+				    ,height: 412
+				    ,toolbar: '#toolbarDemo'
 				    ,url: 'http://localhost:8080/tour/comment/doList' //数据接口
-				    ,page: {limit:5} //开启分页
+				    ,page: {limit:7} //开启分页
 				    
 				    ,cols: [[ //表头
 				       {checkbox: true, fixed: true, name: "checkbox", templet: "#id"}
@@ -153,12 +150,15 @@
 				      ,{field: 'commIntro', title: '评论内容', width:277} 
 				      ,{field: 'commTime', title: '评论时间', width: 180,templet : "<div>{{layui.util.toDateString(d.ordertime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
 				      ,{field: 'perfection', title: '满意度 ', width: 80, }
-				      ,{field: 'status', title: '状态', width: 80,templet:'#status' }
+				      ,{field: 'status', title: '评论状态', width: 80,templet:'#status' }
 				      ,{field: 'lookNum', title: '查看人数', width: 80}
 				      ,{field: 'projectType', title: '类型', width: 135, templet:'#projectType' }
 				      ,{fixed: 'right', width:300, title: '操作', align:'center', toolbar: '#barDemo'}
 				    ]]
 				  });
+				
+				
+				
 				  
 				  
 				})

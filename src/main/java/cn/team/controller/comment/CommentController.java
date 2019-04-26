@@ -1,6 +1,7 @@
 package cn.team.controller.comment;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,12 +30,18 @@ public class CommentController {
 	@Autowired
 	CommentService service;
 	
-	//返回数据接口
+	/**
+	 * 
+	 * @param comment
+	 * @param page  页数
+	 * @param limit 每页显示条数
+	 * @return
+	 */
 	@RequestMapping("doList")
 	@ResponseBody
-	public Map<String, Object> doList(Comment comment,Integer page,Integer limit){
+	public Map<String, Object> doList(Comment comment,@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="7")Integer limit){
 		Map<String, Object> map = new HashMap<String, Object>();
-		  PageBean<Comment> bean = service.selectAllByPage(page, limit, comment);
+		  PageBean<Comment> bean = service.selectAllByPage1(page, limit, comment);
 		int i = service.selectCount(comment);
 		map.put("count", i);
 		map.put("code", 0);
@@ -63,19 +70,31 @@ public class CommentController {
 	
 	//修改评论为不显示
 	@RequestMapping("toDel")
-	public String toDel(@RequestParam(defaultValue="commId") List<Integer> commId){
+	public String toDel(@RequestParam(defaultValue="list") String list){
 		
 		String msg = "删除失败";
 		Comment comment = new Comment();
-		for (Integer integer : commId) {
-			comment.setCommId(integer);
-			comment.setStatus("1");
-			System.out.println(comment);
-			Integer updateByPrimaryKey = service.updateByPrimaryKeySelective(comment);
-			if(updateByPrimaryKey!=0){
-				msg = "删除成功";
-			}
+		//删除最后一个 “,”
+		list.substring(0, list.length()-1);
+		//按“,”分割
+		String[] split = list.split(",");
+		
+		//批量删除
+		for (int i = 0; i < split.length; i++) {
+			String string = split[i];
+		    Integer valueOf = Integer.valueOf(string);
+			
+		    comment.setCommId(valueOf);
+		    comment.setStatus("1");
+
+		    System.out.println(comment);
+		    Integer updateByPrimaryKey = service.updateByPrimaryKeySelective(comment);
+		    if(updateByPrimaryKey!=0){
+		    	msg = "删除成功";
+		    }
 		}
+		
+		
 		System.out.println(msg);
 		
 		return "forward:/comment/toList";
