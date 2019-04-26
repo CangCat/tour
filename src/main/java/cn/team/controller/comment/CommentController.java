@@ -29,6 +29,7 @@ public class CommentController {
 	@Autowired
 	CommentService service;
 	
+	//返回数据接口
 	@RequestMapping("doList")
 	@ResponseBody
 	public Map<String, Object> doList(Comment comment,Integer page,Integer limit){
