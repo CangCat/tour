@@ -23,7 +23,7 @@
 							<input type="text" name="adminName" required lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
 						</div>
 						<div class="layui-form-item">
-							<input type="text" name="adminPassword" required lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+							<input type="password" name="adminPassword" required lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
 						</div>
 						<div class="layui-form-item">
 							<div class="layui-inline">
