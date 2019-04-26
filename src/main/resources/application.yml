@@ -3,6 +3,9 @@ server:
   servlet:
     context-path: /tour
 
+web:
+  upload-path: D:/tourImg/scenic/
+
 spring:
   datasource:
     #四要素
@@ -29,10 +32,8 @@ spring:
       prefix: /WEB-INF/
       suffix: .jsp
     static-path-pattern: /**
-
   resources:
-    static-locations: classpath:/static/admin/
-
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
 
 
 mybatis:
