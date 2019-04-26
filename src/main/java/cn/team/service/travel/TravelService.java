@@ -22,7 +22,39 @@ public interface TravelService {
 	Travels selectOneById(Travels travel);
 
 
+	/**
+	 * 带条件动态分页查询
+	 * @param pageNum
+	 * @param size
+	 * @param status
+	 * @param sName
+	 * @param uName
+	 * @return
+	 */
 	PageBean<Map<String, Object>> selectByPage(Integer pageNum, Integer size, String status, String sName, String uName);
+
+
+	/**
+	 * 修改游记信息
+	 * @param travels
+	 * @return
+	 */
+	int updateTravels(Travels travels);
+
+
+	/**
+	 * 通过游记id查询详细信息
+	 * @param id
+	 * @return
+	 */
+	Map<String, Object> selectInfoByTravelId(Integer id);
 	
+	
+	/**
+	 * 修改游记信息
+	 * @param travels
+	 * @return
+	 */
+	int updateTravel(Travels travels);
 	
 }

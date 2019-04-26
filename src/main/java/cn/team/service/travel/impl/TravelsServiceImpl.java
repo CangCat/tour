@@ -46,4 +46,22 @@ public class TravelsServiceImpl implements TravelService {
 		pageBean.setList(list);
 		return pageBean;
 	}
+	
+	/**
+	 * 修改游记信息
+	 */
+	@Override
+	public int updateTravels(Travels travels){
+		return mapper.updateTravel(travels);
+	}
+	
+	@Override
+	public Map<String,Object> selectInfoByTravelId(Integer id){
+		return mapper.selectInfoByTravelId(id);
+	}
+
+	@Override
+	public int updateTravel(Travels travels) {
+		return mapper.updateTravel(travels);
+	}
 }
