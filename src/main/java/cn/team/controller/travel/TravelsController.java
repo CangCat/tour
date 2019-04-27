@@ -98,6 +98,19 @@ public class TravelsController {
 		return 0;
 	}
 	
+	@RequestMapping("doStatus")
+	@ResponseBody
+	public int doStatus(Integer id){
+		Travels travels = new Travels();
+		travels.setStatus("0");//直接把状态改为0-表示审核通过
+		travels.setTravelId(id);
+		int i = service.updateTravels(travels);
+		if(i>0){
+			return 1;
+		}
+		return 0;
+	}
+	
 	
 	/**
 	 * 根据游记id删除游记的操作

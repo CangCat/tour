@@ -163,7 +163,6 @@
 						console.log(data);
 						if(data>0){
 							layer.msg("提交成功")
-							location.href="${pageContext.request.contextPath}/travel/toUpdate?id=${map.tId}";
 						}else{
 							layer.msg("提交失败")
 						}

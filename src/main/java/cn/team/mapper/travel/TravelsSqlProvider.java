@@ -7,6 +7,7 @@ import cn.team.entity.Travels;
 public class TravelsSqlProvider {
 
 	/**
+	 * //表达式不能再加引号   '%#{scenicName}%'否则报错：java.sql.SQLException: Parameter index out of range (1 > number of parameters, which is 0).
 	 * 多表多条件动态分页查询
 	 * @param startIndex
 	 * @param size
@@ -26,17 +27,18 @@ public class TravelsSqlProvider {
 		
 		if(scenicName!=null){
 			if(!scenicName.equals("")){
-				builder.append(" and  scenic_name like  '%#{scenicName}%'");
+				builder.append(" and  scenic_name like  '%${scenicName}%'");
 			}
 		}
 		
 		if(userName!=null){
 			if(!userName.equals("")){
-				builder.append(" and user_name like  '%#{userName}%'");
+				builder.append(" and user_name like   '%${userName}%'");
 			}
 		}
 		builder.append("  ORDER BY travel_id desc");
 		builder.append(" limit #{startIndex},#{size}");
+		System.out.println(builder.toString());
 		return builder.toString();
 	}
 	

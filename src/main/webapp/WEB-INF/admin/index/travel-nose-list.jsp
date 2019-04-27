@@ -103,7 +103,7 @@
 										<c:if test="${travel.status=='2' }">
 											<th>删除</th>
 										</c:if>
-										<th><c:if test="${travel.status=='1' }"><a class="layui-btn layui-btn-radius layui-btn-normal" href="javascript:;" onclick="check_pass(${travel.tId });">审核</a></c:if><c:if test="${travel.status!='1' }"><a class="layui-btn layui-btn-radius layui-btn-disabled">已审核</a></c:if></th>
+										<th><c:if test="${travel.status=='1' }"><a class="layui-btn layui-btn-radius layui-btn-normal" href="javascript:;" lay-filter="check_pass">审核</a></c:if><c:if test="${travel.status!='1' }"><a class="layui-btn layui-btn-radius layui-btn-disabled">已审核</a></c:if></th>
 										
 										<td>
 											<div class="layui-inline">
@@ -152,23 +152,27 @@
 		   	通过审核的按钮
 		 */
 		 function check_pass(id){
+			 
 			 layer.confirm('该游记写得很棒！',{
 				 btn:['通过审核','取消审核']
 			 },function (){
-				/*  $.ajax({
-					 url:'${pageContext.request.contextPath}/travel/doDelete',
-					 type:'post',
-					 data:{id:id},
-					 async:false,
-					 success:function(msg){
-						 if(msg==1){
-							 layer.msg('审核成功！');
-						 }
-						 else(msg<1){
-							 layer.msg('审核操作失败！请联系技术人员。');
-						 }
-					 }
-				 }); */
+					$.ajax({
+					url: 'doStatus',
+					data:{id:id},
+					type: 'post',
+					dataType: 'json',
+					success: function (data) {
+						console.log(data);
+						if(data>0){
+							layer.msg('审核成功！');
+						}else{
+							layer.msg('审核操作失败！请联系技术人员。');
+						}
+						layer.msg("提交成功")
+						
+					}
+	
+					});
 				 
 			 },function(){
 				 //取消，不做任何动作
