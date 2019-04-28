@@ -13,6 +13,7 @@
 		<title>酒店</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/static/admin/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/static/admin/css/admin.css" />
+		
 	</head>
 
 	<body>
@@ -20,11 +21,7 @@
 				<div class="column-content-detail">
 					<form class="layui-form" action="">
 						<div class="layui-form-item">
-							<div class="layui-inline tool-btn">
-								<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="${pageContext.request.contextPath }/res/toAdd"><i class="layui-icon">&#xe654;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="restaurant-add.html"><i class="layui-icon">&#xe640;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="restaurant-add.html"><i class="iconfont">&#xe656;</i></button>
-							</div>
+							
 							<div class="layui-inline">
 								<select name="states" lay-filter="status">
 									<option value="">请选择一个状态</option>
@@ -37,7 +34,7 @@
 						</div>
 					</form>
 					<div class="layui-form" id="table-list">
-						<table class="layui-table" lay-even lay-skin="nob">
+						<%-- <table class="layui-table" lay-even lay-skin="nob" lay-data="{url:'${pageContext.request.contextPath }/res/doList', page:true, id:'test'}" lay-filter="test">
 							<colgroup>
 								<col width="50">
 								<col class="hidden-xs" width="50">
@@ -50,59 +47,120 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
-									<th class="hidden-xs">ID</th>
-									<th class="hidden-xs">排序</th>
-									<th>景区名称</th>
-									<th>餐厅大图</th>
-									<th class="hidden-xs">餐厅简介...</th>
-									<th class="hidden-xs">地址</th>
-									<th>创建时间</th>
-									<th class="hidden-xs">联系方式</th>
-									<th>状态</th>
-									<th>操作</th>
+									<th lay-data="{type:'checkbox'}"></th>
+									<th class="hidden-xs" lay-data="{field: 'restId'}"><input value="121">ID</th>
+									<th class="hidden-xs" lay-data="{field: 'restName'}">餐厅名</th>
+									<th lay-data="{field: 'scenic', templet: '#scenic'}">景区名称</th>
+									<th lay-data="{field: 'restPic'}">餐厅大图</th>
+									<th class="hidden-xs" lay-data="{field: 'restIntro'}">餐厅简介...</th>
+									<th class="hidden-xs" lay-data="{field: 'restAddress'}">地址</th>
+									<th lay-data="{field: 'createTime'}">创建时间</th>
+									<th class="hidden-xs" lay-data="{field: 'restTel'}">联系方式</th>
+									<th lay-data="{field: 'status',templet: '#status'}">状态</th>
+									<th lay-data="{field: 'right',align:'center', toolbar: '#barDemo'}">操作</th>
 								</tr>
 							</thead>
-							<tbody>
-								<c:forEach items="${list }" var="res">
-									<tr>
-										<td><input type="checkbox" name="" lay-skin="primary" data-id="1"></td>
-										<th class="hidden-xs">${res.restId }</th>
-										<th class="hidden-xs">1</th>
-										<th>${res.scenic.scenicName }</th>
-										<th>${res.restPic }</th>
-										<th class="hidden-xs">${res.restIntro }</th>
-										<th class="hidden-xs">${res.restAddress }</th>
-										<th>${res.createTime }</th>
-										<th class="hidden-xs">${res.restTel }</th>
-										<th>${res.status}</th>
-										<td>
-											<div class="layui-inline">
-												<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="${res.restId}" data-url="${pageContext.request.contextPath }/res/toDetail"><i class="layui-icon">&#xe642;</i></button>
-												<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="${res.restId}" data-url="${pageContext.request.contextPath }/res/delete"><i class="layui-icon">&#xe640;</i></button>
-											</div>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<div class="page-wrap">
-							<ul class="pagination">
-								<li class="disabled"><span>«</span></li>
-								<li class="active"><span>1</span></li>
-								<li>
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">»</a>
-								</li>
-							</ul>
-						</div>
+							
+						</table> --%>
+						<table id="table" class="layui-table" lay-even lay-skin="nob" lay-filter="test"></table> 
 					</div>
 				</div>
 		</div>
 		<script src="${pageContext.request.contextPath }/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath }/static/admin/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath }/static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-	</body>
+		<script type="text/javascript">
+		layui.use('table', function() {
+			var table = layui.table;
+	
 
+			table.render({
+				elem: '#table'
+				,height: 600
+				,url: '${pageContext.request.contextPath }/res/doList' //数据接口
+				,toolbar: 'default'
+				,totalRow: true
+				,cellMinWidth: 80
+				,page: true /*{limit:5}*/ //开启分页
+				,cols: [[ //表头
+				     {type:'checkbox'} 
+					,{field: 'restId', title: 'ID'}
+					,{field: 'restName', title: '餐厅名称'}
+					,{field: 'scenic', title: '景区名称',  templet: '#scenic'}
+					,{field: 'restAddress', title: '地址'}
+					,{field: 'restPic', title: '餐厅大图'}
+					,{field: 'restTel', title: '联系人电话'}
+					,{field: 'restIntro', title: '餐厅简介'}
+					,{field: 'createTime', title: '创建时间',templet:"<div>{{layui.util.toDateString(d.ordertime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+					,{field: 'status', title: '状态',   templet: "#status"}
+					,{fixed: 'right', title: '操作', align:'center', toolbar: '#barDemo'}
+				]]
+			});
+			
+			table.on('toolbar(test)', function(obj){
+			    var checkStatus = table.checkStatus(obj.config.id)
+			    ,data = checkStatus.data; //获取选中的数据
+			    switch(obj.event){
+			      case 'add':
+			    	  window.location.href="/tour/res/toAdd"
+			      break;
+			      case 'update':
+			        if(data.length === 0){
+			          layer.msg('请选择一行');
+			        } else if(data.length > 1){
+			          layer.msg('只能同时编辑一个');
+			        } else {
+			          window.location.href="/tour/res/toAdd?restId="+checkStatus.data[0].restId;
+			        }
+			      break;
+			      case 'delete':
+			        if(data.length === 0){
+			          layer.msg('请选择一行');
+			        } else {
+			          var ids='';
+			          for(var i=0 ;i<data.length;i++){
+			        	  ids+=checkStatus.data[i].restId+",";
+			          }
+			          layer.msg('删除'+ids);
+			          window.location.href="/tour/res/deleteAll?ids="+ids;
+			        }
+			      break;
+			    };
+			  });
+		});
+		
+		
+    </script> 
+   		
+		<script type="text/html" id="barDemo">
+ 			 <div class="layui-inline">
+				<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="{{d.restId}}" data-url="${pageContext.request.contextPath }/res/toDetail"><i class="layui-icon">&#xe642;</i></button>
+				<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="{{d.restId}}" data-url="${pageContext.request.contextPath }/res/delete"><i class="layui-icon">&#xe640;</i></button>
+			</div>
+		</script>
+		<script type="text/html" id="cbox">
+				<input type="checkbox" name="checkbox" lay-skin="primary" data-id="{{d.restId}}">
+		</script>
+		<script type="text/html" id="status">
+			{{#   if(d.status == 0){ }}
+				营业
+			{{#  } else if(d.status == 3) { }}
+				删除
+			{{# } }}
+		</script>
+		<script type="text/html" id="scenic">
+			{{#   if(d.scenic != null){ }}
+				<div>{{d.scenic.scenicName}}</div>
+			{{#  } else if(d.status == 10) { }}
+			{{# } }}
+		</script>
+		<script type="text/html">
+			table.on('checkbox(test)', function(obj){
+  				console.log(obj.checked); //当前是否选中状态
+  				console.log(obj.data); //选中行的相关数据
+  				console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+			});
+		</script>
+	</body>
+	
 </html>

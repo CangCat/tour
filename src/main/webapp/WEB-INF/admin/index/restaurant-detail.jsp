@@ -19,30 +19,19 @@
 				<form class="layui-form">
 					<div class="layui-tab" style="margin: 0;">
 						<ul class="layui-tab-title">
-							<li><a href="scenic-list.jsp">景点列表</a></li>
-							<li class="layui-this">景点详情</li>
+							<li><a href="${pageContext.request.contextPath }/res/toList">餐厅列表</a></li>
+							<li class="layui-this">餐厅详情</li>
 							
 						</ul>
 						<div class="layui-tab-content">
 							<div class="layui-tab-item"></div>
 							<div class="layui-tab-item layui-show">
 								<div class="layui-form-item">
-									<label class="layui-form-label">景点名称：</label>
+									<label class="layui-form-label">餐厅名称：</label>
 									<div class="layui-input-block">
-										<input type="text" name="name" required lay-verify="required" placeholder="请输入文章名称" autocomplete="off" class="layui-input">
+										<input type="text" name="name" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
 									</div>
 								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">景区分类：</label>
-									<div class="layui-input-block">
-										<select name="category" lay-verify="required">
-											<option value="">请选择分类</option>
-											<optgroup label="国内游">
-												<option value="1" selected="">国内游</option>
-												<option value="2">国外游</option>
-											</optgroup>
-										</select>
-									</div>
 								</div>
 								<div class="layui-form-item">
 									<label class="layui-form-label">图像上传：</label>
