@@ -18,7 +18,7 @@ public String AdminselectAllByPage(@Param("startIndex")int startIndex,@Param("si
 		
 		if(admin.getName()!=null&&admin.getName().length()>0){
 			
-			sb.append(" and a.name=#{admin.name} ");	
+			sb.append(" and a.name like '%${admin.name}%' ");
 		}
 		
 		
@@ -52,7 +52,7 @@ public String AdminselectAllByPage(@Param("startIndex")int startIndex,@Param("si
 		
 		if(admin.getName()!=null&&admin.getName().length()>0){
 			
-			sb.append(" and a.name=#{admin.name} ");	
+			sb.append(" and a.name like '%${admin.name}%' ");
 		}
 		
 		

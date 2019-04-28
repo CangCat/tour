@@ -26,6 +26,7 @@ public class AdminServiceImpl implements AdminService  {
 		return ad.selectOne(admin);
 	}
 
+	//分页
 	@Override
 	public PageBean<Admin> adminselectAllByPage(int page, int size, Admin admin, int desc) {
 				// TODO Auto-generated method stub

@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -10,7 +9,7 @@
 		<meta name="renderer" content="webkit">
   		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>网站后台管理模版</title>
+		<title>会员后台管理模版</title>
 		<link rel="stylesheet" type="text/css" href="${path}/static/admin/layui/css/layui.css"/>
 		<link rel="stylesheet" type="text/css" href="${path}/static/admin/css/admin.css"/>
 	</head>
@@ -23,42 +22,34 @@
 		  <div class="layui-tab-content">
 		    <div class="layui-tab-item layui-show">
 		    	<!-- post 才能提交图片 -->
-		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;" method="post" enctype="multipart/form-data" action="${path}/admin/doadmint_info" >
+		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;" method="post" enctype="multipart/form-data" action="${path}/user/doUserInfo" >
 		    	<!-- 第一个form---开始 -->
-			    	
-			    	
-			    	
 					  <div class="layui-form-item">
 					    <label class="layui-form-label">ID：</label>
 					    <div class="layui-input-block">
-					      <input type="text" name="adminId" disabled autocomplete="off" class="layui-input layui-disabled" value="${admin.adminId }">
+					      <input type="text" name="userId" disabled autocomplete="off" class="layui-input layui-disabled" value="${user.userId }">
 					    </div>
 					  </div>
 					  <div class="layui-form-item">
-					    <label class="layui-form-label">登录名：</label>
+					    <label class="layui-form-label">邮箱：</label>
 					    <div class="layui-input-block">
-					      <input type="text" name="loginName" disabled autocomplete="off" class="layui-input layui-disabled" value="${admin.loginName }">
-					  	 
-					  	 
-					  	 <input type="hidden" name="adminId" value="${admin.adminId }">
-					    <input type="hidden" name="loginName" value="${admin.loginName }">
-					    <input type="hidden" name="password" value="${admin.password }">
-					    <input type="hidden" name="gender" value="${admin.gender }">
-					    <input type="hidden" name="registerTime  " value="${admin.registerTime   }">
-					    <input type="hidden" name="adminType" value="${admin.adminType  }">
-					    
+					      <input type="text" name="email" disabled autocomplete="off" class="layui-input layui-disabled" value="${user.email }">
+					  	 <input type="hidden" name="userId" value="${user.userId }">
+					    <input type="hidden" name="email" value="${user.email }">
+					    <input type="hidden" name="password" value="${user.password }">
+					    <input type="hidden" name="registerTime  " value="${user.registerTime   }">
 					    </div>
 					  </div>
 					   <div class="layui-form-item">
 					    <label class="layui-form-label">姓名：</label>
 					    <div class="layui-input-block">
-					      <input type="text" name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="${admin.name }">
+					      <input type="text" name="userName" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input" value="${user.userName }">
 					    </div>
 					  </div>
 					  <div class="layui-form-item">
 					    <label class="layui-form-label">手机：</label>
 					    <div class="layui-input-block">
-					      <input type="text" name="tel" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="${admin.tel }">
+					      <input type="text" name="tel" required  lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input" value="${user.tel }">
 					    </div>
 					  </div>
 					  <div class="layui-form-item layui-form-text">
@@ -70,37 +61,28 @@
 					  </div>
 					  
 					  
-					  <!-- 加状态与类型 -->
+					  <!-- 性别 -->
 					  <div class="layui-form-item">
-									<label class="layui-form-label">状态：</label>
-									<div class="layui-input-block">
-										<select name="adminStatus" lay-verify="required">
-												<option value="0" selected="">开通</option>
-												<option value="2">停用</option>
-										</select>
+						<label class="layui-form-label">状态：</label>
+						<div class="layui-input-block">
+							<select name="gender" lay-verify="required"  value="user.gender">
+									<option value="0" selected="">女</option>
+									<option value="2">男</option>
+							</select>
 						</div>
 					</div>
-					
-					
 					
 					<div class="layui-form-item">
 						<label class="layui-form-label">状态：</label>
 						<div class="layui-input-block">
-							<select name="adminType" lay-verify="required">
-									<option value="0" selected="">开放所有</option>
-									<option value="2">酒店管理</option>
-									<option value="3">景区管理</option>
-									<option value="4">餐厅管理</option>
-									<option value="5">娱乐管理</option>
-									<option value="6">待定</option>
-									
+							<select name="userStatus" lay-verify="required" value="user.userStatus">
+									<option value="0" selected="">注册</option>
+									<option value="2">删除</option>
 							</select>
 						</div>
 					</div>
 					
 					
-					
-					  
 					  
 					  <div class="layui-form-item">
 					    <div class="layui-input-block">
@@ -120,22 +102,24 @@
 		    ---
 		     -->
 		    <div class="layui-tab-item">
-		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;" onsubmit="return toVaild()"  action="${path}/admin/doadmint_info_password" >
+		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;" onsubmit="return toVaild()"  action="${path}/user/doadmint_info_password" >
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">用户名：</label>
 				    <div class="layui-input-block">
-				      <input type="text" name="loginName1" disabled autocomplete="off" class="layui-input layui-disabled" value="${admin.loginName }">
+				      <input type="text" name="userName" disabled autocomplete="off" class="layui-input layui-disabled" value="${user.userName }">
 				    	
-				    	<input type="hidden" name="registerTime" value="${admin.registerTime }">
-				    	<input type="hidden" name="loginName"  id="loginName" value="${admin.loginName }">
-				     	<input type="hidden" name="adminId" value="${admin.adminId }">
-				     	<input type="hidden" name="name" value="${admin.name }">
-				     	<input type="hidden" name="tel" value="${admin.tel }">
-				     	<input type="hidden" name="pic" value="${admin.pic }">
-					    <input type="hidden" name="gender" value="${admin.gender }">
-					    <input type="hidden" name="adminStatus" value="${admin.adminStatus }">
-					    <input type="hidden" name="registerTime  " value="${admin.registerTime   }">
-					    <input type="hidden" name="adminType" value="${admin.adminType  }">
+				    	
+				    	
+				    	<input type="hidden" name="userId"  id="userId" value="${user.userId }">
+				    	<input type="hidden" name="userName" value="${user.userName }">
+				    	<input type="hidden" name="email"  id="loginName" value="${user.email }">
+				     	<input type="hidden" name="tel" value="${user.tel }">
+				     	<input type="hidden" name="gender" value="${user.gender }">
+				     	<input type="hidden" name="userStatus" value="${user.userStatus }">
+				     	<input type="hidden" name="pic" value="${user.pic }">
+					    <!-- 注册 -->
+					    <input type="hidden" name="registerTime" value="${user.registerTime }">
+					    
 				    
 				    </div>
 				  </div>
@@ -200,8 +184,8 @@
 	function yanzhen(){
 		
 		$.ajax({
-			url:"${path}/admin/toadmint_info_passw",
-			data:{"pwd1":$("#pwd").val(),"loginName":$("#loginName").val(),},
+			url:"${path}/user/toadmint_info_passw",
+			data:{"pwd1":$("#pwd").val(),"userId":$("#userId").val(),},
 			type:"post",
 			success:function(data){
 				console.log(data);

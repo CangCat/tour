@@ -172,22 +172,34 @@ public class AdminController {
 	@RequestMapping("doadmint_add")
 	public String doadmint_add(ModelMap modelMap,MultipartFile file,Admin admin){
 		
-//		file.getOriginalFilename   获取文件名
-//		System.out.println("文件名："+file.getOriginalFilename());
-		//将文件放入D:\\img
-		File target = new File("D:\\img\\admin\\"+file.getOriginalFilename());
-		
-		try {
-			file.transferTo(target);//文件上传
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		if(!file.isEmpty()){
+			
+//			System.out.println("有图片的");
+			
+			File target = new File("D:\\img\\admin\\"+file.getOriginalFilename());
+			
+//			System.out.println("图片的名字："+file.getOriginalFilename());
+			
+			try {
+				file.transferTo(target);//文件上传
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			admin.setPic(file.getOriginalFilename());
+			
+		}else{
+			
+			admin.setPic("555.png");
+			
 		}
 		
-		admin.setPic(file.getOriginalFilename());
+		
+		
 		admin.setRegisterTime(new Date());
 		admin.setAdminStatus("0");
 		
@@ -265,13 +277,13 @@ public class AdminController {
 		admin.setUpdateTime(new Date());
 //		System.out.println("要修改的："+admin);
 		
+		//管理员类型
 		String adminType = admin.getAdminType();
 		
-		
-		
+		//需要剪切的
 		String[] split = adminType.split(",");
 		
-//		 System.out.println("adminType:"+split[1]);
+//		System.out.println("adminType:"+split[1]);
 		
 		admin.setAdminType(split[1]);
 		
@@ -361,9 +373,9 @@ public class AdminController {
 	@ResponseBody
 	public String toadmint_delete_list(ModelMap modelMap,@RequestParam("o_id[]") ArrayList<Integer>  o_id){
 		
-		System.out.println("进入批量删除");
+//		System.out.println("进入批量删除");
 		
-		System.out.println(o_id);
+//		System.out.println(o_id);
 		
 		int dei=0;
 		String dele = "";
@@ -377,7 +389,7 @@ public class AdminController {
 			
 		}
 		
-		System.out.println("删除是啥"+dei);
+//		System.out.println("删除是啥"+dei);
 		
 		if(dei==1){
 			
