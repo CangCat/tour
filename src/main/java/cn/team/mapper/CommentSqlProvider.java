@@ -24,4 +24,24 @@ public class CommentSqlProvider {
 		
 		return string;
 	}
+	
+	
+	public String selectCount(@Param("comment")Comment comment){
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("select count(comm_id) from comment where 1=1 ");
+		
+		if(comment.getStatus()!=null&&comment.getStatus().length()>0&&comment.getStatus()!=""){
+			sb.append(" and status = #{comment.status} ");
+		}
+		if(comment.getCommIntro()!=null&&comment.getCommIntro().length()>0&&comment.getCommIntro()!="") {
+			sb.append(" and comm_intro like concat('%',#{comment.commIntro},'%' ) "  );
+		}
+			
+		
+		
+		String string = sb.toString();
+		
+		return string;
+	}
 }

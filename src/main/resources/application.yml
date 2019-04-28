@@ -41,7 +41,11 @@ mybatis:
     # 开启支持驼峰命名
     map-underscore-to-camel-case: true
 
-
+# 开启日志
+logging:
+  level: 
+    cn.team.mapper: trace
+    
 
 
 

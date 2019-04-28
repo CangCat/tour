@@ -42,7 +42,7 @@ public class CommentController {
 	public Map<String, Object> doList(Comment comment,@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="7")Integer limit){
 		Map<String, Object> map = new HashMap<String, Object>();
 		  PageBean<Comment> bean = service.selectAllByPage1(page, limit, comment);
-		int i = service.selectCount(comment);
+		int i = service.selectCountAll(comment);
 		map.put("count", i);
 		map.put("code", 0);
 		map.put("data", bean.getList());
@@ -52,7 +52,6 @@ public class CommentController {
 	
 	@RequestMapping("toList")
 	public String toList(){
-		
 		return "admin/index/comment-list";
 	}
 	

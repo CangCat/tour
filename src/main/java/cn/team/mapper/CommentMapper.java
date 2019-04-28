@@ -18,4 +18,7 @@ public interface CommentMapper extends Mapper<Comment>,MySqlMapper<Comment> {
 //	
 	@SelectProvider(type = CommentSqlProvider.class,method="selectAllByPage")
 	List<Comment> selectAllByPage(@Param("startIndex")int startIndex,@Param("size")int size,@Param("comment")Comment comment);
+	
+	@SelectProvider(type = CommentSqlProvider.class,method="selectCount")
+	int selectCountAll(@Param("comment")Comment comment);
 }

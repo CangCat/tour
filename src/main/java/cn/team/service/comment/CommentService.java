@@ -10,7 +10,7 @@ public interface CommentService {
 	List<Comment> selectAll();
 
 
-	int selectCount(Comment comment);
+	int selectCountAll(Comment comment);
 	
 	PageBean<Comment> selectAllByPage(int page,int size,Comment comment);
 

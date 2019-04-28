@@ -26,15 +26,15 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public int selectCount(Comment comment){
+	public int selectCountAll(Comment comment){
 		
-		return mapper.selectCount(comment);
+		return mapper.selectCountAll(comment);
 		
 	}
 
 	@Override
 	public PageBean<Comment> selectAllByPage(int page, int size,Comment comment) {
-		int count = mapper.selectCount(comment);
+		int count = mapper.selectCountAll(comment);
 		PageBean<Comment> bean = new PageBean<Comment>(size,page,count);
 		List<Comment> list = mapper.selectAllByPage(bean.getStartIndex(), size, comment);
 		
@@ -65,6 +65,7 @@ public class CommentServiceImpl implements CommentService {
 		
 		return bean;
 	}
+	
 	
 	
 }
