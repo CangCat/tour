@@ -34,7 +34,9 @@
 <script src="${pageContext.request.contextPath}/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/static/admin/js/common.js" type="text/javascript"  charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
- 
+<script type="text/html" id="img_function">
+	<img scr="{{d.fun_pic}}">
+</script>
 <script>
 layui.use('table', function(){
   var table = layui.table;
@@ -51,8 +53,16 @@ layui.use('table', function(){
       ,{field:'scenic_name', title:'景点', width:120, edit: 'text'}
       ,{field:'fun_name', title:'娱乐名称', width:180, edit: 'text', sort: true}
       ,{field:'fun_address', title:'地点', width:180}
-      ,{field:'fun_pic', title:'大图',width:180}
-      ,{field:'status', title:'状态', width:180, sort: true}
+      ,{field:'fun_pic', title:'大图',templet:'#img_function',width:180}
+      ,{field:'status', title:'状态',templet: function(row) {
+          if (row.status == 0) {
+              return "正常"
+          } else if (row.status == 1) {
+              return "申请"
+          }else if (row.status ==2){
+          	return "删除"
+          }
+      }, width:180, sort: true}
       ,{field:'create_time', title:'创建时间', width:180}
       ,{field:'fun_intro', title:'详细信息', width:300, sort: true}
       ,{field:'fun_time', title:'开放时间', width:180}

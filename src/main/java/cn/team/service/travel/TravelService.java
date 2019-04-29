@@ -56,5 +56,22 @@ public interface TravelService {
 	 * @return
 	 */
 	int updateTravel(Travels travels);
+
+
+	/**
+	 * 新增游记数据信息
+	 * @param travels
+	 * @return
+	 */
+	int addTravel(Travels travels);
+
+	
+
+	/**
+	 * 批量改游记状态
+	 * @param travels
+	 * @return
+	 */
+	int deleteTravels(int[] aids);
 	
 }

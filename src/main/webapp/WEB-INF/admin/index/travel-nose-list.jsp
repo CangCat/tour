@@ -21,7 +21,7 @@
 						<div class="layui-form-item">
 							<div class="layui-inline tool-btn">
 								<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="${pageContext.request.contextPath}/travel/toAdd"><i class="layui-icon">&#xe654;</i></button>
-								<button class="layui-btn layui-btn-small layui-btn-danger delBtn"  data-url="scenic-add..html"><i class="layui-icon">&#xe640;</i></button>
+								<button class="layui-btn layui-btn-small layui-btn-danger" onclick="deletes()"><i class="layui-icon">&#xe640;</i></button>
 								<!-- <button class="layui-btn layui-btn-small layui-btn-warm listOrderBtn hidden-xs" data-url="scenic-add.html"><i class="iconfont">&#xe656;</i></button> -->
 							</div>
 							<div class="layui-inline">
@@ -35,8 +35,8 @@
 							<div class="layui-inline">
 								<select name="status" lay-filter="status">
 									<option value="" <c:if test="${status=='' }">selected</c:if>>请选择一个评论状态</option>
-									<option value="0" <c:if test="${status=='0' }">selected</c:if>>正常</option>
-									<option value="1" <c:if test="${status=='1' }">selected</c:if>>停止</option>
+									<option value="0" <c:if test="${status=='0' }">selected</c:if>>发表</option>
+									<option value="1" <c:if test="${status=='1' }">selected</c:if>>待审核</option>
 									<option value=2 <c:if test="${status=='2' }">selected</c:if>>删除</option>
 								</select>
 							</div>
@@ -62,7 +62,7 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+									<th><input type="checkbox" name="travelId"  lay-skin="primary" lay-filter="allChoose"></th>
 									<th class="hidden-ls">ID</th>
 									<th>用户名称</th>
 									<th  class="hidden-ls">游记景点</th>
@@ -78,8 +78,8 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${pageBean.list}" var="travel">
-									<tr>
-										<td><input type="checkbox" name="tId" lay-skin="primary"value="${travel.tId }"></td>
+									<tr>	
+										<td><input type="checkbox" name="tId" <c:if test="${travel.status=='2' }">readonly="readonly"</c:if> lay-skin="primary" value="${travel.tId }"></td>
 										<th class="hidden-ls">${travel.tId }</th>
 										<th>${travel.uName }</th>
 										<th class="hidden-ls">${travel.sName }</th>
@@ -103,12 +103,12 @@
 										<c:if test="${travel.status=='2' }">
 											<th>删除</th>
 										</c:if>
-										<th><c:if test="${travel.status=='1' }"><a class="layui-btn layui-btn-radius layui-btn-normal" href="javascript:;" lay-filter="check_pass">审核</a></c:if><c:if test="${travel.status!='1' }"><a class="layui-btn layui-btn-radius layui-btn-disabled">已审核</a></c:if></th>
+										<th><c:if test="${travel.status=='1' }"><a class="layui-btn layui-btn-radius layui-btn-normal" href="javascript:;" onclick="check_pass(${travel.tId})">审核</a></c:if><c:if test="${travel.status!='1' }"><a class="layui-btn layui-btn-radius layui-btn-disabled">已审核</a></c:if></th>
 										
 										<td>
 											<div class="layui-inline">
 												<button class="layui-btn layui-btn-small layui-btn-normal go-btn"  data-id="${travel.tId}" data-url="toUpdate"><i class="layui-icon">&#xe642;</i></button>
-												<button class="layui-btn layui-btn-small layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i></button>
+												<button class="layui-btn layui-btn-small layui-btn-danger" onclick="delete_trave(this,${travel.tId})"><i class="layui-icon">&#xe640;</i></button>
 											</div>
 										</td>
 									</tr>
@@ -137,6 +137,7 @@
 
 		<script src="${pageContext.request.contextPath}/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/static/admin/js/common.js" type="text/javascript"  charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.js" type="text/javascript"  charset="utf-8"></script>
 		<script type="text/javascript">
 		 //分页处理
 	        function changePage(page,size){
@@ -163,12 +164,19 @@
 					dataType: 'json',
 					success: function (data) {
 						console.log(data);
-						if(data>0){
-							layer.msg('审核成功！');
+						if(data.count>0){
+							layer.open({
+							  title: '审核结果'
+							  ,content: '审核成功！'
+							});  
+							location.href="${pageContext.request.contextPath}/travel/toList";
 						}else{
-							layer.msg('审核操作失败！请联系技术人员。');
+							layer.open({
+								  title: '审核结果'
+								  ,content: '审核操作失败！请联系技术人员。'
+								
+								}); 
 						}
-						layer.msg("提交成功")
 						
 					}
 	
@@ -180,24 +188,34 @@
 		 }
 		 
 		 
-		 function delete_trave(id){
+		 function delete_trave(obj,id){
 			 layer.confirm('删除要慎重！您确定要删除id为：'+id+'的用户吗？',{
 				 btn:['确定','取消']
 			 },function (){
-				/*  $.ajax({
-					 url:'doDelete',
-					 type:'post',
-					 data:{id:id},
-					 async:false,
-					 success:function(msg){
-						 if(msg>0){
-							 layer.msg('删除成功！');
-						 }
-						 else(msg<1){
-							 layer.msg('删除操作失败！请联系技术人员。');
-						 }
-					 }
-				 }); */
+				//确认删除发送ajax请求
+	                $.ajax({
+	                    url: '${pageContext.request.contextPath}/travel/doDelete',
+	                    type: "post",
+	                    data: {
+	                        "id": id
+	                    },
+	                    success: function(d) {
+	                        if (d == 1) {
+	                        	layer.open({
+									  title: '删除结果'
+									  ,content: '删除成功！'
+									
+									}); 
+	                        	location.href="${pageContext.request.contextPath}/travel/toList";
+	                        } else {
+	                            layer.open({
+									  title: '删除结果'
+									  ,content: '审核操作失败！请联系技术人员。'
+									
+									}); 
+	                        }
+	                    }
+	                });
 				 
 			 },function(){
 				 //取消，不做任何动作
@@ -240,6 +258,53 @@
 			  }); */
 			  
 			});
+		 
+		 function deletes() {
+         	//:checkbox找到所有checkbox  [name='aids']  找到name='aids' 的    :checked 找到被选中的
+         	var objs = $(":checkbox[name='tId']:checked");
+		 	console.log(objs.length);
+         	if(objs.length==0){
+         	//console.log($("#operate_result_info").find("span"));
+         		//alert("请至少选择一条数据！");
+         		//设置msg
+         		layer.open({
+					  title: '结果'
+					  ,content: '至少选择一条数据'
+					
+					}); 
+         		return;
+         	}
+         	
+         	var ids = new Array();
+         	
+         	objs.each(function(i,obj){
+         		/* console.log(parseInt($(obj).val()));
+         		ids.push(parseInt($(obj).val())); */
+         		ids.push($(obj).val());
+         	})
+         	//console.log(ids.toString());//[元素1,元素2]
+         	
+         	$.post(
+         			"${pageContext.request.contextPath}/travel/doManyDelete",
+         			{"ids":ids.toString()},
+         			function(data){
+         				if(data.count>0){
+         					layer.open({
+       						  title: '结果'
+       						  ,content: '删除成功！'
+       						
+       						});
+         				}else{
+         					layer.open({
+       						  title: '结果'
+       						  ,content: '删除失败！请联系工作人员。'
+       						
+       						});
+         				}
+         				
+         			});
+         			
+		 }
 		</script>
 	</body>
 

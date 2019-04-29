@@ -1,6 +1,9 @@
 package cn.team.mapper.travel;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
+
 
 import cn.team.entity.Travels;
 
@@ -38,7 +41,6 @@ public class TravelsSqlProvider {
 		}
 		builder.append("  ORDER BY travel_id desc");
 		builder.append(" limit #{startIndex},#{size}");
-		System.out.println(builder.toString());
 		return builder.toString();
 	}
 	
@@ -102,5 +104,29 @@ public class TravelsSqlProvider {
 		builder.deleteCharAt(builder.length()-1);
 		builder.append(" where travel_id=#{travelId}");
 		return builder.toString();
+	}
+	
+	
+	/**
+	 * 参数只有一个，并且是数组格式，需要包装成集合Map
+	 * @return
+	 */
+	public String deleteTravels(Map<String,Object> map){
+		int[] ids = (int[]) map.get("array");
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("update travels set status='"+2+"'");//修改状态
+		
+		sb.append(" where travel_id in");
+		sb.append("(");
+		
+		for (int i = 0; i < ids.length; i++) {
+			sb.append("#{array["+i+"]},");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		sb.append(")");
+		
+		return sb.toString();
 	}
 }

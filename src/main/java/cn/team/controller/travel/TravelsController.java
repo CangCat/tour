@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import cn.team.entity.Scenic;
 import cn.team.entity.Travels;
+import cn.team.service.cangcat.ScenicService;
 import cn.team.service.travel.TravelService;
 import cn.team.utils.PageBean;
-import net.minidev.json.JSONObject;
 
 @Controller
 @RequestMapping("travel")
@@ -30,6 +32,9 @@ public class TravelsController {
 	
 	@Autowired
 	TravelService service;
+	
+	@Autowired
+	ScenicService sservice;
 
 	/**
 	 * 游记列表页
@@ -57,16 +62,24 @@ public class TravelsController {
 	 * @return
 	 */
 	@RequestMapping("toAdd")
-	public String toAdd(){
+	public String toAdd(ModelMap map){
+		List<Scenic> s = sservice.selectAll();
+		map.put("scenic", s);
 		return "admin/index/travel-nose-add";
 	}
 	
 	/**
 	 * 执行新增操作
+	 * 1、新增成功后去到的页面是
 	 * @return
 	 */
 	@RequestMapping("doAdd")
-	public String doAdd(){
+	public String doAdd(Travels travels,ModelMap map){
+		int addTravel = service.addTravel(travels);
+		map.put("t", travels);
+		if(addTravel>0){
+			return "admin/index/travel-nose-add";
+		}
 		return "admin/index/travel-nose-add";
 	}
 	
@@ -98,17 +111,49 @@ public class TravelsController {
 		return 0;
 	}
 	
+	@RequestMapping("doManyDelete")
+	@ResponseBody
+	public Map<String,Object> doManyDelete(String ids){
+		Map<String,Object> map = new HashMap<String,Object>();
+		//"id1,id2,id3"
+		//System.out.println(ids);
+		if(ids.length()<1){
+			map.put("count", 0);
+			return map;
+		}
+		String[] params = ids.split(","); 
+		
+		int[] aids = new int[params.length];
+		
+		for (int i = 0; i < params.length; i++) {
+			aids[i] = Integer.valueOf(params[i]) ;
+			
+		}
+		
+		int result = service.deleteTravels(aids);
+		//System.out.println(result);
+		
+		map.put("count", result);
+		return map;
+		
+	}
+	
 	@RequestMapping("doStatus")
 	@ResponseBody
-	public int doStatus(Integer id){
+	public Map<String,Object> doStatus(Integer id){
 		Travels travels = new Travels();
 		travels.setStatus("0");//直接把状态改为0-表示审核通过
 		travels.setTravelId(id);
 		int i = service.updateTravels(travels);
+		Map<String,Object> map = new HashMap<String,Object>();
 		if(i>0){
-			return 1;
+	        map.put("code",0);
+			map.put("msg","");
+	        map.put("count", i);
+	        map.put("data", 1);
+			return map;
 		}
-		return 0;
+		return map;
 	}
 	
 	
@@ -138,9 +183,10 @@ public class TravelsController {
 	public final static String UPLOAD_FILE_PATH = "D:\\ui\\";
     
     @RequestMapping(value = "uploadFile")
-    public String uploadImage(@RequestParam("file") MultipartFile file) {
+    @ResponseBody
+    public Map<String,Object> uploadImage(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
-            Map<String, String> resObj = new HashMap<>(500000);
+            Map<String,Object> resObj = new HashMap<String,Object>();
             try {
                 BufferedOutputStream out = new BufferedOutputStream(
                         new FileOutputStream(new File(UPLOAD_FILE_PATH, file.getOriginalFilename())));
@@ -150,11 +196,11 @@ public class TravelsController {
             } catch (IOException e) {
                 resObj.put("msg", "error");
                 resObj.put("code", "1");
-                return JSONObject.toJSONString(resObj);
+                return resObj;
             }
             resObj.put("msg", "ok");
             resObj.put("code", "0");
-            return JSONObject.toJSONString(resObj);
+            return resObj;
         } else {
             return null;
         }

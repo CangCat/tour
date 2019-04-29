@@ -55,13 +55,37 @@ public class TravelsServiceImpl implements TravelService {
 		return mapper.updateTravel(travels);
 	}
 	
+	/**
+	 * 查询详细信息
+	 */
 	@Override
 	public Map<String,Object> selectInfoByTravelId(Integer id){
 		return mapper.selectInfoByTravelId(id);
 	}
 
+	/**
+	 * 修改游记信息
+	 */
 	@Override
 	public int updateTravel(Travels travels) {
 		return mapper.updateTravel(travels);
+	}
+	
+	/**
+	 * 新增游记数据信息
+	 * @param travels
+	 * @return
+	 */
+	@Override
+	public int addTravel(Travels travels){
+		return mapper.insert(travels);
+	}
+
+	/**
+	 * 批量修改状态为删除状态
+	 */
+	@Override
+	public int deleteTravels(int[] aids) {
+		return mapper.deleteTravels(aids);
 	}
 }

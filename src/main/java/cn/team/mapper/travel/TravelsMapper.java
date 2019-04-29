@@ -61,4 +61,7 @@ public interface TravelsMapper extends Mapper<Travels>,MySqlMapper<Travels> {
 	 */
 	@Select("select t.travel_id tId,t.intro intro,t.like_num likeNum,t.look_num lookNum,t.status status,t.create_time createTime,t.prefaction prefaction,t.picture picture,s.scenic_name sName,s.scenic_id sId,u.user_id uId,u.user_name uName from travels t,scenic s,usersOne u where s.scenic_id = t.scenic_id and u.user_id= t.user_id and t.travel_id=#{id}")
 	Map<String,Object> selectInfoByTravelId(@Param(value="id")Integer id);
+	
+	 @UpdateProvider(type=TravelsSqlProvider.class,method="deleteTravels")
+	 int deleteTravels(int... ids);
 }
