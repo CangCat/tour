@@ -105,7 +105,10 @@ public class AdminController {
 					
 					//默认转发
 //					return "admin/index/admin-list";
-					return "forward:/admin/toadmint_list";
+					
+					map.put("adminOne", admin );
+					
+					return "admin/index/index";
 					
 				}
 				else {
