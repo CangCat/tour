@@ -2,17 +2,32 @@ package cn.team.entity;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="room")
 public class Room {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="room_id")
     private Integer roomId;
-
+	@Column(name="room_name")
     private String roomName;
-
+	@Column(name="room_price")
     private BigDecimal roomPrice;
 
+	@Column(name="room_remark")
     private String roomRemark;
 
+	@Column(name="room_pic")
     private String roomPic;
 
+	@Column(name="hotel_id")
     private Integer hotelId;
 
     public Integer getRoomId() {
@@ -62,4 +77,12 @@ public class Room {
     public void setHotelId(Integer hotelId) {
         this.hotelId = hotelId;
     }
+
+	@Override
+	public String toString() {
+		return "Room [roomId=" + roomId + ", roomName=" + roomName + ", roomPrice=" + roomPrice + ", roomRemark="
+				+ roomRemark + ", roomPic=" + roomPic + ", hotelId=" + hotelId + "]";
+	}
+    
+    
 }

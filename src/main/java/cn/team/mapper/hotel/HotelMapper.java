@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 import cn.team.entity.Hotel;
 
@@ -45,7 +46,9 @@ public interface HotelMapper  extends Mapper<Hotel> ,MySqlMapper<Hotel> {
 	 * 编写一个方法 传入四个参数，进行动态拼接sql语句  返回一个字符串对象(sql语句)
 	 */
 	@SelectProvider(method="selectAllPage",type=HotelMapperSql.class)
-	List<Hotel> selectAllPage(@Param("startIndex")int page,@Param("size")int size,@Param("name")String name,@Param("status")String status,@Param("desc")int desc,@Param("hotel")Hotel hotel);
-	
+	List<Hotel> selectAllPage(@Param("startIndex")int page,@Param("size")int size,@Param("name")String name,@Param("status")String status,@Param("desc")int desc);
+
+	@UpdateProvider(method="updateHotel",type=HotelMapperSql.class)
+	Integer updateHotel(Hotel hotel);
 	
 }

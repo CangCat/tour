@@ -53,13 +53,18 @@ public class HotelServicelmpl implements HotelService{
 		return hmapper.updateByPrimaryKeySelective(record);
 	}
 	@Override
-	public PageBean<Hotel> selectAllPage(int page, int size,String name,String status,int desc,Hotel hotel) {
+	public PageBean<Hotel> selectAllPage(int page, int size,String name,String status,int desc) {
 		int total = hmapper.selectCountAll();
 		PageBean<Hotel> pageBean=new PageBean<Hotel>(size,page,total);
-		List<Hotel> list = hmapper.selectAllPage(pageBean.getStartIndex(), size, name, status, desc, hotel);
+		List<Hotel> list = hmapper.selectAllPage(pageBean.getStartIndex(), size, name, status, desc);
 		pageBean.setList(list);
 		
 		return pageBean;
+	}
+	@Override
+	public Integer updateHotel(Hotel hotel) {
+		// TODO Auto-generated method stub
+		return hmapper.updateHotel(hotel);
 	}
 	
 	

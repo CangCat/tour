@@ -9,7 +9,7 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>酒店后台管理模版</title>
+		<title>酒店订单后台管理模版</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/admin/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/admin/css/admin.css" />
 		
@@ -17,10 +17,10 @@
 	
 	<body>
 		<div class="page-content-wrap">
-				<form class="layui-form" action="${pageContext.request.contextPath }/hotel/doHotelDetailUpdate" method="post">
+				<form class="layui-form" action="${pageContext.request.contextPath }/hotelOrder/doHotelOrderUpdate" method="post">
 					<div class="layui-tab" style="margin: 0;">
 						<ul class="layui-tab-title">
-							<li><a href="${pageContext.request.contextPath }/hotel/toPageList">酒店列表</a></li>
+							<li><a href="${pageContext.request.contextPath }/hotelOrder/toPageList">酒店列表</a></li>
 							<li class="layui-this">酒店详情</li>
 							
 						</ul>
@@ -31,95 +31,59 @@
 							
 								
 								<div class="layui-form-item">
-									<label class="layui-form-label">酒店名称：</label>
+									<label class="layui-form-label">订单号：</label>
+									
 									<div class="layui-input-block">
-										<input type="text" name="hotelName"  class="layui-input" value="${hoteles.hotelName }">
-										<input type="hidden" name="hotelId" value="${hoteles.hotelId }">
-									</div>
+										<input type="text" name="orderId" readonly="readonly" class="layui-input" value="${order.orderId }">
+										
+									</div> 
+									
 								</div>
 								<div class="layui-form-item">
-									<label class="layui-form-label">所属景区：</label>
+									<label class="layui-form-label">用户名字：</label>
 									<div class="layui-input-block">
-										<select name="scenicId" lay-verify="required">
-											<option value="">请选择景区</option>
-											<optgroup label="国内游">
-												<c:forEach items="${scenic }" var="s">
-												<option value="${s.scenicId }">${s.scenicName }</option>
-												</c:forEach>
-											</optgroup>
-										</select>
-									</div>
-								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">图像上传：</label>
-									<div class="layui-input-block">
-										<input type="file" name="hotelPic" class="layui-upload-file" value="">
-										<img src="${hoteles.hotelPic }">
-									</div>
-								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">酒店级别：</label>
-									<div class="layui-input-block">
-										<input type="checkbox" name="hotelClass"  checked value="${hoteles.hotelClass }">
+										
+										<input type="text" name="userName" readonly="readonly" class="layui-input" value="${user.userName }">								
 										
 									</div>
 								</div>
-								<div class="layui-form-item layui-form-text">
-									<label class="layui-form-label">酒店简介：</label>
+								<div class="layui-form-item">
+									<label class="layui-form-label">酒店名字：</label>
 									<div class="layui-input-block">
-										<textarea placeholder="" class="layui-textarea" name="hotelDes" >${hoteles.hotelDes  }</textarea>
+										<input type="text" name="hotelName" readonly="readonly" class="layui-input" value="${hotel.hotelName }">
 									</div>
 								</div>
 								
 								<div class="layui-form-item">
-									<label class="layui-form-label">详细地址：</label>
-									<div class="layui-input-block">
-										<input type="text" name="hotelAddress" value="${hoteles.hotelAddress }" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
-									</div>
-								</div>
-								
-								<div class="layui-form-item">
-									<label class="layui-form-label">联系人：</label>
-									<div class="layui-input-block">
-										<input type="text" name="hotelLink" value="${hoteles.hotelLink }" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" class="layui-input">
-									</div>
-								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">联系人手机号：</label>
-									<div class="layui-input-block">
-										<input type="text" name="hotelTel" required lay-verify="required" placeholder="" value="${hoteles.hotelTel }" autocomplete="off" class="layui-input" value="100">
-									</div>
-								</div>
-								
-								<div class="layui-form-item">
-									<label class="layui-form-label">状态：</label>
-									<div class="layui-input-block">
-										<input type="text" name="status" required lay-verify="required" placeholder="" value="${hoteles.status }" autocomplete="off" class="layui-input" value="100">
-									</div>
-								</div>
-								
-								<div class="layui-form-item">
-									<label class="layui-form-label">创建时间：</label>
+									<label class="layui-form-label">入住时间：</label>
 									<div class="layui-input-block">
 										
-										<input type="text" name="creatTime" placeholder="" value="<fmt:formatDate value="${hoteles.creatTime }" pattern="yyyy-MM-dd hh:mm:ss"/>" autocomplete="off" class="layui-input" value="100">
+										<input type="text" name="hotelCheckin" placeholder="" value="<fmt:formatDate value="${order.hotelCheckin}" pattern="yyyy-MM-dd hh:mm:ss"/>" autocomplete="off" class="layui-input" value="100">
 									</div>
 								</div>
-								
 								<div class="layui-form-item">
-									<label class="layui-form-label">点击数：</label>
+									<label class="layui-form-label">酒店房间数：</label>
 									<div class="layui-input-block">
-										<input id="test1" type="number" name="hotelCount" required lay-verify="required"  autocomplete="off" class="layui-input" value="${hoteles.hotelCount }">
+										
+										<input type="text"  name="roomCount" placeholder="" value="${order.roomCount}" autocomplete="off" class="layui-input" value="100">
+									</div>
+								</div>
+								<div class="layui-form-item">
+								
+									<label class="layui-form-label">订单状态：</label>
+									<div class="layui-input-block">
+									   <input name="status" type="radio" <c:if test="${order.status=='0' }">checked</c:if> value='0'>已订
+									   <input name="status" type="radio" <c:if test="${order.status=='1' }">checked</c:if> value='1'>已取消
+									</div> 
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">订购时间：</label>
+									<div class="layui-input-block">
+										
+										<input type="text" name="hotelCheckin" placeholder="" value="<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>" autocomplete="off" class="layui-input" value="100">
 									</div>
 								</div>
 								
-								<div class="layui-form-item layui-form-text">
-									<label class="layui-form-label">酒店详情：</label>
-									<div class="layui-input-block">
-										<textarea class="layui-textarea layui-hide" name="hotelPic" lay-verify="content" id="LAY_demo_editor">${hoteles.hotelPic }</textarea>
-									</div>
-								</div>
-							
 							</div>
 						</div>
 						

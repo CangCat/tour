@@ -23,6 +23,7 @@ public interface HotelService {
 	 */
 	Integer insert(Hotel record);
 	
+	
 	/**
 	 * 根据id进行查询
 	 */
@@ -36,6 +37,7 @@ public interface HotelService {
 	 * 更新
 	 */
 	Integer updateByPrimaryKeySelective(Hotel record);
+	Integer updateHotel(Hotel hotel);
 	
 	/**
 	 * 酒店详情
@@ -46,7 +48,7 @@ public interface HotelService {
 	 */
 	
 
-	PageBean<Hotel> selectAllPage(int page, int size, String name, String status, int desc, Hotel hotel);
+	PageBean<Hotel> selectAllPage(int page, int size, String name, String status, int desc);
 	
 	
 }
