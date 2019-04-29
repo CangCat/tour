@@ -1,6 +1,7 @@
 package cn.team.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -42,8 +43,20 @@ public class UsersOne {
 
     //修改时间
     private Date updateTime;
+    
+    private List<Comment> comments;
+    
+    
 
-    public Integer getUserId() {
+    public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public Integer getUserId() {
         return userId;
     }
 

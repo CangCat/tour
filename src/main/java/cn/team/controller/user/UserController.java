@@ -299,7 +299,65 @@ public class UserController {
 			
 		}
 	
-	
-	
+		//登录
+		//1登录成功0邮箱或密码错误，请确认,2账号已被封冷冻联系客服3请注册
+		@RequestMapping("userlogin")
+		@ResponseBody
+		public String touserlogin(ModelMap modelMap,String Name,String Password){
+			System.out.println("邮箱："+Name);
+			
+			UsersOne usersOne = new UsersOne();
+			
+			usersOne.setEmail(Name);
+			
+			UsersOne one = uos.selectlogin(usersOne);
+			
+			System.out.println("邮箱："+one);
+			
+			if(!one.equals(null)){
+				System.out.println("查找到");
+				//判断前台登录页面传过来的值
+				if(Password!=null){
+					System.out.println("前台登录密码："+Password);
+					Password=Md5Utils.getMd5(Password);
+					System.out.println("加密后的密码："+Password);
+			}
+			//判断登录
+			if(Name.equals(one.getEmail())&&Password.equals(one.getPassword())){
+				
+				System.out.println("登录进来，查看是否有冻结账号");
+				
+				if(one.getUserStatus().equals("1")){
+					System.out.println("冻结账号");
+					//2账号已被封冷冻联系客服
+					return "2";
+					
+				}else{
+					System.out.println("登录成功");
+					//1登录成功
+					return "1";
+				}
+				
+			}else{
+				System.out.println("密码错误");
+				//0邮箱或密码错误
+				return "0";
+				
+			}
+			}else{
+				System.out.println("请注册");
+				
+				//3请注册
+				return "3";
+			}
+		}
+		
+		//跳转到
+		@RequestMapping("userloginindex")
+		public String userloginindex(ModelMap modelMap){
+		
+			return "admin/index/index";
+		}
+		
 	
 }
