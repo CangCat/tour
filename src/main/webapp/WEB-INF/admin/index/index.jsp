@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>旅游主页</title>
 		<link rel="stylesheet" type="text/css" href="${path }/static/admin/layui/css/layui.css"/>
-		<script type="text/javascript" src="${path }/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="${path}/js/jquery.min.js"></script>
 		<script src="${path}/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${path}/static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 	</head>
@@ -28,11 +28,11 @@
 				<ul class="layui-nav layui-layout-right">
 					<li class="layui-nav-item">
 						<a href="javascript:;">
-							<img src="http://t.cn/RCzsdCq" class="layui-nav-img"> 贤心
+							<img src="http://t.cn/RCzsdCq" class="layui-nav-img"> ${adminOne.name}
 						</a>
 						<dl class="layui-nav-child">
-							<dd><a onclick="tabChange('基本资料','tabAdmin','${path}/travel/toList')">游记管理</a></dd>
-							<dd><a onclick="tabChange('安全设置','tabRepwd','${path}/function/toList')')">安全设置</a></dd>
+							<dd><a onclick="tabChange('个人信息','tabAdmin','${path}/travel/toList')">个人信息</a></dd>
+							<dd><a onclick="tabChange('安全设置','tabRepwd','${path}/function/toList')">安全设置</a></dd>
 						</dl>
 					</li>
 					<a href="login.html"><li class="layui-nav-item"><a href="">退了</a></li>
@@ -44,18 +44,42 @@
 					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 					<ul class="layui-nav layui-nav-tree" lay-filter="test">
 						<li class="layui-nav-item">
-							<a href="javascript:;">网站管理</a>
+							<a href="javascript:;">景点管理</a>
 							<dl class="layui-nav-child">
-								<dd><a href="javascript:;" onclick="tabChange('首页轮播','tabCarousel','${path}/travel/toList')">首页轮播</a></dd>
-								<dd><a href="javascript:;">页面底部</a></dd>
+								<dd><a href="javascript:;" onclick="tabChange('景点列表','tabCarousel','${path}/scenic/toScenicList')">景点列表</a></dd>
+								<dd><a href="javascript:;" onclick="tabChange('景点订单','tabCarousel1','${path}/travel/toList')">景点订单</a></dd>
 								<!--<dd><a href="">超链接</a></dd>-->
 							</dl>
 						</li>
-						<li class="layui-nav-item"><a onclick="tabChange('歌曲管理','tabSong','${path}/travel/toList')">歌曲管理</a></li>
-						<li class="layui-nav-item"><a onclick="tabChange('专辑管理','tabCD','${path}/travel/toList')">专辑管理</a></li>
-						<li class="layui-nav-item"><a onclick="tabChange('歌单管理','tabSongList','${path}/travel/toList')">歌单管理</a></li>
-						<li class="layui-nav-item"><a onclick="tabChange('歌手管理','tabSinger','${path}/travel/toList')">歌手管理</a></li>
-						<li class="layui-nav-item"><a onclick="tabChange('用户管理','tabUser','${path}/travel/toList')">用户管理</a></li>
+						<li class="layui-nav-item">
+							<a href="javascript:;">酒店管理</a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;" onclick="tabChange('酒店列表','tabCarousel2','${path}/hotel/toPageList')">酒店列表</a></dd>
+								<dd><a href="javascript:;" onclick="tabChange('房间列表','tabCarousel3','${path}/room/toPageList')">房间列表</a></dd>
+								<dd><a href="javascript:;" onclick="tabChange('订单列表','tabCarousel4','${path}/hotelOrder/toPageList')">订单列表</a></dd>
+								<!--<dd><a href="">超链接</a></dd>-->
+							</dl>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;">餐厅管理</a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;" onclick="tabChange('餐厅列表','tabCarousel5','${path}/res/toList')">餐厅列表</a></dd>
+								<dd><a href="javascript:;" onclick="tabChange('餐厅订单','tabCarousel6','${path}/travel/toList')">餐厅订单</a></dd>
+								<!--<dd><a href="">超链接</a></dd>-->
+							</dl>
+						</li>
+						<li class="layui-nav-item"><a onclick="tabChange('娱乐管理','tabSong7','${path}/function/toList')">娱乐管理</a></li>
+						<li class="layui-nav-item"><a onclick="tabChange('游记管理','tabSong8','${path}/travel/toList')">游记管理</a></li>
+						<li class="layui-nav-item"><a onclick="tabChange('评论管理','tabCD9','${path}/comment/toList')">评论管理</a></li>
+						<li class="layui-nav-item">
+							<a href="javascript:;">人员管理</a>
+							<dl class="layui-nav-child">
+								<dd><a href="javascript:;" onclick="tabChange('用户管理','tabCarousel10','${path}/user/toUserList')">用户管理</a></dd>
+								<dd><a href="javascript:;" onclick="tabChange('管理员管理','tabCarousel11','${path}/admin/toadmint_list')">管理员管理</a></dd>
+								<!--<dd><a href="">超链接</a></dd>-->
+							</dl>
+						</li>
+						<li class="layui-nav-item"><a onclick="tabChange('系统管理','tabSinger12','${path}/travel/toList')">系统管理</a></li>
 					</ul>
 				</div>
 			</div>
@@ -70,7 +94,7 @@
 						</ul>
 						<div class="layui-tab-content">
 							<div class="layui-tab-item layui-show">
-								<iframe scrolling="yes" frameborder="0" src="${path}/function/toList" style="height: 1000px;" width= "100%"></iframe>
+								<iframe scrolling="yes" frameborder="0" src="${path}/travel/welcome" style="height: 1000px;" width= "100%"></iframe>
 							</div>
 						</div>
 					</div>

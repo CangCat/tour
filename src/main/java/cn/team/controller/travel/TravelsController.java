@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,9 +74,18 @@ public class TravelsController {
 	 * 1、新增成功后去到的页面是
 	 * @return
 	 */
+	/**
+	 * @param travels
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping("doAdd")
 	public String doAdd(Travels travels,ModelMap map){
+		travels.setStatus("1");
+		travels.setUserId(1004);
+		travels.setCreateTime(new Date());
 		int addTravel = service.addTravel(travels);
+		System.out.println(addTravel);
 		map.put("t", travels);
 		if(addTravel>0){
 			return "admin/index/travel-nose-add";
@@ -259,4 +269,9 @@ public class TravelsController {
         }  
         return false;  
     } 
+    
+    @RequestMapping(value = "welcome")
+    public String toWelcome(){
+    	return "admin/index/welcome";
+    }
 }

@@ -19,12 +19,12 @@
  
 <script type="text/html" id="toolbarDemo">
   <div class="layui-btn-container">
-    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">删除</button>
+    
   </div>
 </script>
- 
+ <!-- <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button> -->
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -63,7 +63,7 @@ layui.use('table', function(){
           	return "删除"
           }
       }, width:180, sort: true}
-      ,{field:'create_time', title:'创建时间', width:180}
+      ,{field:'create_time', title:'创建时间', width:180,templet: "<div>{{layui.util.toDateString(d.create_time, 'yyyy-MM-dd')}}</div>"}
       ,{field:'fun_intro', title:'详细信息', width:300, sort: true}
       ,{field:'fun_time', title:'开放时间', width:180}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
