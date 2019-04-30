@@ -70,7 +70,7 @@
 						</ul>
 						<div class="layui-tab-content">
 							<div class="layui-tab-item layui-show">
-								<iframe scrolling="yes" frameborder="0" src="${path}/function/toList" style="height:900px;" width="100%"></iframe>
+								<iframe scrolling="yes" frameborder="0" src="${path}/function/toList" style="height: 1000px;" width= "100%"></iframe>
 							</div>
 						</div>
 					</div>
@@ -102,7 +102,7 @@
 						//添加
 						element.tabAdd('demo', {
 							title: title,
-							content: '<iframe scrolling="no" frameborder="0" src="' + src + '" style="height: 1000px;" width="1300px;"></iframe>' //支持传入html
+							content: '<iframe scrolling="yes" frameborder="0" src="' + src + '" style="height: 1000px;" width="100%"></iframe>' //支持传入html
 								,
 							id: id
 						});

@@ -70,70 +70,78 @@ public class AdminController {
 	
 	//开始登录功能
 	@RequestMapping("doLogin")
-	public String doLogin(ModelMap map,String adminName,String adminPassword,String adminverity,HttpSession session){
+	public String doLogin(HttpSession session,ModelMap map,String adminName,String adminPassword,String adminverity){
 //		System.out.println("提交数据");
 //		System.out.println("登录名:"+adminName);
 //		System.out.println("密码:"+adminPassword);
 //		System.out.println("前段传过来的验证码:"+adminverity);
-		
-		Object vcode = session.getAttribute("vcode");
-//		System.out.println("验证码："+object);
-		Admin admins = new Admin();
-		admins.setLoginName(adminName);
-		Admin admin = ads.selectlogin(admins);
-//		System.out.println("登录查询的："+admin);
-		//密码加密
-		if(adminPassword!=null){
-//			System.out.println("进入密码加密功能");
-//			System.out.println("adminPassword是什么："+adminPassword);
-			adminPassword = Md5Utils.getMd5(adminPassword);
-//			System.out.println("编译后 ："+adminPassword);
-		}
-		
-//		System.out.println("开始进入");
-		
-		//admin账号存在
-		if(admin!=null){
+		if(adminName!=null && !adminName.equals("")){
+			Object vcode = session.getAttribute("vcode");
+//			System.out.println("验证码："+object);
+			Admin admins = new Admin();
+			admins.setLoginName(adminName);
 			
-			String loginName = admin.getLoginName();
-			String password = admin.getPassword();
-			//验证码校验
-		if(adminverity.equals(vcode)){
-			if(admin.getLoginName()!=null){
-				if(adminName.equals(loginName)&&adminPassword.equals(password)){
-//					System.out.println("登录成功");
-					
-					//默认转发
-//					return "admin/index/admin-list";
-					
-					map.put("adminOne", admin );
-					
-					return "admin/index/index";
-					
-				}
-				else {
-//					System.out.println("登录失败");
-					//登录失败重定向返回
-					//这个要按模块来重定向
-					map.put("prompt", "用户名或密码错误" );
-					//后期可添加改变输入宽的文字
-//					return "redirect:/admin/toLogin";
-					return "admin/index/login";
-				}
+//			System.out.println("登录查询的："+admin);
+			//密码加密
+			if(adminPassword!=null){
+//				System.out.println("进入密码加密功能");
+//				System.out.println("adminPassword是什么："+adminPassword);
+				adminPassword = Md5Utils.getMd5(adminPassword);
+//				System.out.println("编译后 ："+adminPassword);
 			}
 			
-		}else{
-			map.put("prompt", "验证码错误" );
-			//后期可添加改变输入宽的文字
-//			return "redirect:/admin/toLogin";
-			return "admin/index/login";
+//			System.out.println("开始进入");
 			
+			
+			if(adminverity!=null && adminverity.equals(vcode)){
+				Admin admin = ads.selectlogin(admins);
+				//admin账号存在
+				if(admin!=null){	
+					String loginName = admin.getLoginName();
+					String password = admin.getPassword();
+					//验证码校验
+					if(admin.getLoginName()!=null){
+						if(adminName.equals(loginName)&&adminPassword.equals(password)){
+	//						System.out.println("登录成功");
+							
+							//默认转发
+	//						return "admin/index/admin-list";
+							
+							session.setAttribute("adminOne", admin);
+							
+	//						map.put("adminOne", admin );
+							return "admin/index/index";
+							
+						}
+						else {
+	//						System.out.println("登录失败");
+							//登录失败重定向返回
+							//这个要按模块来重定向
+							map.put("prompt", "用户名或密码错误" );
+							//后期可添加改变输入宽的文字
+	//						return "redirect:/admin/toLogin";
+							return "admin/index/login";
+						}
+					}
+					
+				
+				}
+				else {
+					map.put("prompt", "请注册账号" );
+					return "admin/index/login";
+				}
+			
+			}else{
+				map.put("prompt", "验证码错误" );
+				//后期可添加改变输入宽的文字
+//				return "redirect:/admin/toLogin";
+				return "admin/index/login";
+				
+			}
 		}
-		}
-		else {
-			map.put("prompt", "请注册账号" );
-			return "admin/index/login";
-		}
+		
+		
+		
 		return "admin/index/login";
 	}
 	
