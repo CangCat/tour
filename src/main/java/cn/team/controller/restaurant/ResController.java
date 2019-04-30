@@ -103,8 +103,8 @@ public class ResController {
 	
 	/**
 	 * 跳转到修改页面，根据传入的id将对象绑定到页面
-	 * @param map
-	 * @param id
+	 * @param map 没什么用
+	 * @param id 就是ID
 	 * @return
 	 */
 	@RequestMapping("toDetail")
