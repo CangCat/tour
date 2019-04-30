@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import cn.team.entity.Travels;
 import tk.mybatis.mapper.common.Mapper;
@@ -33,6 +35,7 @@ public interface TravelsMapper extends Mapper<Travels>,MySqlMapper<Travels> {
 	 * @param userName 用户名模糊
 	 * @return
 	 */
+	@Cacheable(value="tour",key="'myselect'")
 	@SelectProvider(type=TravelsSqlProvider.class,method="selectByPage")
 	List<Map<String,Object>> selectByPage(@Param(value="startIndex")Integer startIndex, @Param(value="size")Integer size,  @Param("status")String status, @Param("scenicName")String scenicName,@Param("userName")String userName);
 	
@@ -43,6 +46,7 @@ public interface TravelsMapper extends Mapper<Travels>,MySqlMapper<Travels> {
 	 * @param userName 用户名模糊
 	 * @return
 	 */
+	@Cacheable(value="tour",key="'myselect'")
 	@SelectProvider(type=TravelsSqlProvider.class,method="selectCountAll")
 	int selectCountAll(String status, String scenicName,String userName);
 	
@@ -51,6 +55,7 @@ public interface TravelsMapper extends Mapper<Travels>,MySqlMapper<Travels> {
 	 * @param id
 	 * @return
 	 */
+	@CacheEvict(value="tour",key="'myselect'")
 	@UpdateProvider(type=TravelsSqlProvider.class,method="updateTravel")
 	int updateTravel(Travels travels);
 	
@@ -59,9 +64,11 @@ public interface TravelsMapper extends Mapper<Travels>,MySqlMapper<Travels> {
 	 * @param id
 	 * @return
 	 */
+	@Cacheable(value="tour",key="'myselect'")
 	@Select("select t.travel_id tId,t.intro intro,t.like_num likeNum,t.look_num lookNum,t.status status,t.create_time createTime,t.prefaction prefaction,t.picture picture,s.scenic_name sName,s.scenic_id sId,u.user_id uId,u.user_name uName from travels t,scenic s,usersOne u where s.scenic_id = t.scenic_id and u.user_id= t.user_id and t.travel_id=#{id}")
 	Map<String,Object> selectInfoByTravelId(@Param(value="id")Integer id);
 	
+	@CacheEvict(value="tour",key="'myselect'")
 	 @UpdateProvider(type=TravelsSqlProvider.class,method="deleteTravels")
 	 int deleteTravels(int... ids);
 }

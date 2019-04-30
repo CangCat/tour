@@ -51,9 +51,9 @@
 								<col class="hidden-xs" width="50">
 								<col class="hidden-xs" width="120">
 								<col class="hidden-xs" width="120">
-								<col>
+								<col width="300">
 								<col width="200">
-								<col width="200">
+								<%-- <col width="200"> --%>
 								<col width="120">
 								<col width="120">
 								<col width="120">
@@ -68,7 +68,7 @@
 									<th  class="hidden-ls">游记景点</th>
 									<th>游记内容</th>
 									<th>发表时间</th>
-									<th>满意度</th>
+									<!-- <th>满意度</th> -->
 									<th class="hidden-ls">查看人数</th>
 									<th class="hidden-ls">点赞人数</th>
 									<th class="hidden-ls">游记状态</th>
@@ -85,11 +85,11 @@
 										<th class="hidden-ls">${travel.sName }</th>
 										<th style="overflow:visible;text-overflow:inherit;">${travel.intro }</th>
 										<th> <fmt:formatDate value="${travel.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/> </th>
-										<th>
+										<!-- <th>
 											<div id="test9" class="layui-inline">
 												
 											</div>
-										</th>
+										</th> -->
 										<th class="hidden-ls"> ${travel.lookNum }</th>
 										<th> ${travel.likeNum }</th>
 										<c:if test="${travel.status=='0' }">

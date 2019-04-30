@@ -3,10 +3,8 @@ server:
   servlet:
     context-path: /tour
 
-web:
-  upload-path: D:/tourImg/scenic/
+spring: 
 
-spring:
   datasource:
     #四要素
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -33,7 +31,10 @@ spring:
       suffix: .jsp
     static-path-pattern: /**
   resources:
-    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:D:/tourImg
+
+web:
+  profile: D:/tourImg
 
 
 mybatis:

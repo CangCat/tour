@@ -35,7 +35,7 @@
 <script src="${pageContext.request.contextPath}/static/admin/js/common.js" type="text/javascript"  charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
 <script type="text/html" id="img_function">
-	<img scr="{{d.fun_pic}}">
+	<img scr="/img/{{d.fun_pic}}">
 </script>
 <script>
 layui.use('table', function(){
