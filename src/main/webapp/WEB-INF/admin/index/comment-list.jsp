@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-<title>酒店f</title>
+<title>酒店</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/static/admin/layui/css/layui.css"
 	media="all" />
@@ -25,8 +25,7 @@
 				<div class="layui-form-item">
 
 					<div class="layui-inline">
-						<input type="text" name="commIntro" id="commIntroSearch" required
-							lay-verify="required" placeholder="请输入景点" autocomplete="off"
+						<input type="text" name="commIntro" id="commIntroSearch"  placeholder="请输入内容" autocomplete="off"
 							class="layui-input">
 					</div>
 					<div class="layui-inline">
@@ -37,7 +36,7 @@
 						</select>
 					</div>
 					<button class="layui-btn layui-btn-normal" lay-submit="search"
-						type="button" id="submit">搜索</button>
+						type="button" id="search">搜索</button>
 				</div>
 
 
@@ -58,7 +57,6 @@
 						</div> -->
 				</div>
 			</form>
-			<button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
 		</div>
 	</div>
 	<script
@@ -70,7 +68,7 @@
 	<!-- 每条数据的工具栏 -->
 	<script type="text/html" id="barDemo">
  			 <a class="layui-btn layui-btn-xs" lay-event="edit"  href="${pageContext.request.contextPath}/comment/tomodi?id={{d.commId}}">编辑</a>
- 			 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" method="offset" data-type="auto" href="javascript:;">删除</a>
+ 			 <a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="del" method="offset" href="javascript:;" onclick="delOne({{d.comm_id}})" >删除</a>
   
  			 <!-- 这里同样支持 laytpl 语法，如： -->
  			 {{#  if(d.auth > 2){ }}
@@ -87,9 +85,9 @@
 		</script>
 
 	<script type="text/html" id="projectType">
-  			{{#  if(d.projectType == 1){ }}
+  			{{#  if(d.project_type == 1){ }}
    			    景区
- 			 {{#  } else if(d.projectType == 2) { }}
+ 			 {{#  } else if(d.project_type == 2) { }}
    			 酒店
  			 {{#  } else { }}
 				餐厅
@@ -97,9 +95,9 @@
 		</script>
 	<script type="text/html" id="toolbarDemo">
  			 <div class="layui-btn-container">
-   			 	<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
-   				<button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
-    			<button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+   			 	<button class="layui-btn layui-btn-sm" lay-event="add" type="button">添加</button>
+   				<button class="layui-btn layui-btn-sm" lay-event="delete" type="button">删除</button>
+    			<button class="layui-btn layui-btn-sm" lay-event="update" type="button">编辑</button>
  			 </div>
 	    </script>
 
@@ -113,15 +111,32 @@
 							var table = layui.table;
 							var layer = layui.layer;
 							var $ = layui.$;
-
-							table.on('checkbox(test)', function(obj) {
+							
+							
+							/* table.on('checkbox(test)', function(obj) {
 								var checkStatus = table.checkStatus('idTest');
 								console.log(checkStatus.data);
 								var os = checkStatus.data;
 								$(os).each(function(i) {
 									console.log(os[i].commId);
 								})
-							})
+							}) */
+							
+							//单个删除
+							delOne=function (list){
+								layer.confirm('确定要删除码？', {
+								  btn: ['是','否'] //按钮
+								}, function(){//点击‘是’后删除
+									window.location.href = "${pageContext.request.contextPath}/comment/toDel?list="
+										+ list;
+								  layer.msg('已删除', {icon: 1});
+								}, function(){//点击‘否’取消
+								  layer.msg('已取消', {
+								    time: 1000, //1s后自动关闭
+								    btn: [ '知道了']
+								  });
+								});
+							}
 
 							table
 									.on(
@@ -129,24 +144,41 @@
 											function(obj) {
 												var checkStatus = table
 														.checkStatus(obj.config.id);
+												var os = checkStatus.data;//选中的数据
 												switch (obj.event) {
-
+												
+												//批量删除
 												case 'delete':
-													layer.msg('删除');
-													var os = checkStatus.data;
-													var list = "";
-													for (var i = 0; i < os.length; i++) {
-														list += os[i].commId
-																+ ",";
-													}
-													console.log(list);
-													window.location.href = "${pageContext.request.contextPath}/comment/toDel?list="
-															+ list;
+													
+													 layer.confirm('确定要删除'+os.length+'条记录吗？', {
+														  btn: ['是','否'] //按钮
+													}, function(){//点击‘是’后删除
+														var list = "";
+														for (var i = 0; i < os.length; i++) {
+															list += os[i].comm_id
+																	+ ",";
+														}
+														console.log(list);
+														window.location.href = "${pageContext.request.contextPath}/comment/toDel?list="
+																+ list;
+													  layer.msg('已删除', {icon: 1});
+													}, function(){//点击‘否’取消
+													  layer.msg('已取消', {
+													    time: 1000, //1s后自动关闭
+													    btn: [ '知道了']
+													  });
+													}); 
+													
+													
+													
+													
 													break;
 
 												case 'update':
 													layer.msg('编辑');
 													break;
+													
+												
 												}
 												;
 											});
@@ -156,9 +188,9 @@
 									.render({
 										elem : '#table',
 										id : 'idTest',
-										height : 412,
+										height : 406,
 										toolbar : '#toolbarDemo',
-										url : 'http://localhost:8080/tour/comment/doList' //数据接口
+										url : 'http://localhost:8080/tour/comment/doList1' //数据接口
 										,
 										page : {
 											limit : 7
@@ -173,28 +205,33 @@
 													templet : "#id"
 												},
 												{
-													field : 'commId',
+													field : 'comm_id',
 													title : 'ID',
 													width : 80,
 													fixed : 'left'
 												},
 												{
-													field : 'userId',
+													field : 'user_id',
 													title : 'userId',
 													width : 80
 												},
 												{
-													field : 'projectId',
+													field : 'user_name',
+													title : '用户名',
+													width : 80
+												},
+												{
+													field : 'project_id',
 													title : '类别',
 													width : 80,
 												},
 												{
-													field : 'commIntro',
+													field : 'comm_intro',
 													title : '评论内容',
 													width : 277
 												},
 												{
-													field : 'commTime',
+													field : 'comm_time',
 													title : '评论时间',
 													width : 180,
 													templet : "<div>{{layui.util.toDateString(d.ordertime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
@@ -208,11 +245,11 @@
 													width : 80,
 													templet : '#status'
 												}, {
-													field : 'lookNum',
+													field : 'look_num',
 													title : '查看人数',
-													width : 80
+													width : 110
 												}, {
-													field : 'projectType',
+													field : 'project_type',
 													title : '类型',
 													width : 135,
 													templet : '#projectType'
@@ -224,10 +261,12 @@
 													toolbar : '#barDemo'
 												} ] ]
 									});
-
-							$('#submit').click(function() {
+								
+							//搜索
+							$('#search').click(function() {
 
 								table.reload('idTest', {
+									//搜索的条件
 									where : {
 
 										status : $('#statusSel').val(),
@@ -239,7 +278,10 @@
 								})
 
 							})
-
+							
+							
+							
+							
 						})
 	</script>
 

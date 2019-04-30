@@ -1,7 +1,9 @@
 package cn.team.service.comment;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,6 +67,29 @@ public class CommentServiceImpl implements CommentService {
 		
 		return bean;
 	}
+	
+	@Override
+	public PageBean<Map<String,Object>> selectAllAndUname(Comment comment,@Param("startIndex")Integer page,@Param("size")Integer size,Map<String,Object> map){
+		Integer count = mapper.selectCount(comment);    
+		PageBean<Map<String,Object>> pageBean = new PageBean<Map<String,Object>>(size,page,count);
+		List<Map<String, Object>> list = mapper.selectAllAndUname(pageBean.getStartIndex(), size, map);
+		
+		pageBean.setList(list);
+		return pageBean;
+	}
+	
+	@Override
+	public int selectCountWithUserName(Map<String,Object> map){
+		Integer count = mapper.selectCountWithUserName(map);
+		return count;
+	}
+
+	@Override
+	public PageBean<Map<String, Object>> selectAllAndUname(Integer startIndex, Integer size, Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	
 	
 	

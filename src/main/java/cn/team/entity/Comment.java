@@ -27,8 +27,20 @@ public class Comment {
     private String projectType;
 
     private String commIntro;
+    
+    private UsersOne usersOne;
+    
+    
 
-    public Integer getCommId() {
+    public UsersOne getUsersOne() {
+		return usersOne;
+	}
+
+	public void setUsersOne(UsersOne usersOne) {
+		this.usersOne = usersOne;
+	}
+
+	public Integer getCommId() {
         return commId;
     }
 
