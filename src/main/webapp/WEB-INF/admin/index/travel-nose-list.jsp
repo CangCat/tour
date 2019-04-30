@@ -137,7 +137,7 @@
 
 		<script src="${pageContext.request.contextPath}/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/static/admin/js/common.js" type="text/javascript"  charset="utf-8"></script>
-		<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.js" type="text/javascript"  charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js" type="text/javascript"  charset="utf-8"></script>
 		<script type="text/javascript">
 		 //分页处理
 	        function changePage(page,size){
