@@ -84,15 +84,15 @@
 				,page: true /*{limit:5}*/ //开启分页
 				,cols: [[ //表头
 				     {type:'checkbox'} 
-					,{field: 'restId', title: 'ID'}
-					,{field: 'restName', title: '餐厅名称'}
-					,{field: 'scenic', title: '景区名称',  templet: '#scenic'}
+					,{field: 'restId', title: 'ID',sort: true}
+					,{field: 'restName', title: '餐厅名称',sort: true}
+					,{field: 'scenic', title: '景区名称',  templet: '#scenic',sort: true}
 					,{field: 'restAddress', title: '地址'}
 					,{field: 'restPic', title: '餐厅大图'}
 					,{field: 'restTel', title: '联系人电话'}
 					,{field: 'restIntro', title: '餐厅简介'}
 					,{field: 'createTime', title: '创建时间',templet:"<div>{{layui.util.toDateString(d.ordertime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
-					,{field: 'status', title: '状态',   templet: "#status"}
+					,{field: 'status', title: '状态',   templet: "#status",sort: true}
 					,{fixed: 'right', title: '操作', align:'center', toolbar: '#barDemo'}
 				]]
 			});

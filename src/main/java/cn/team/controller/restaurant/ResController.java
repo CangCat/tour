@@ -42,7 +42,6 @@ public class ResController {
 	@RequestMapping("doList")
 	@ResponseBody
 	public Map<String, Object> doList(Restaurant restaurant,Integer page,Integer limit){
-		System.out.println("dolist");
 		Map<String,Object> map=new HashMap<String,Object>();
 		PageBean<Restaurant> pageBean = service.selectAllByPage(page, limit, restaurant);
 		int count = service.selectCount(restaurant);
