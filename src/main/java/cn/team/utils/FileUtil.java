@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
  */
 public class FileUtil {
     public static void uploadFile(byte[] file, String filePath, String fileName) throws Exception {
+        filePath = "D:/tourImg/scenic/";
         File targetFile = new File(filePath);
         if(!targetFile.exists()){
             targetFile.mkdirs();
